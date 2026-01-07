@@ -5,7 +5,7 @@
 [![Last Commit](https://img.shields.io/github/last-commit/DanOps-1/X-ray?style=flat-square)](https://github.com/DanOps-1/X-ray/commits/main)
 [![Platform](https://img.shields.io/badge/platform-Linux-blue?style=flat-square)](https://github.com/DanOps-1/X-ray)
 
-[**English**](../README.md) | [**中文文档**](README-zh.md)
+[**中文**](../README.md) | [**English**](README-en.md)
 
 **快速部署 Xray-core VLESS + XTLS-Reality 代理服务器**
 
