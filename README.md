@@ -1,28 +1,132 @@
-# Xray 服务端一键配置脚本
+<div align="center">
 
-[![GitHub Stars](https://img.shields.io/github/stars/DanOps-1/X-ray?style=flat-square)](https://github.com/DanOps-1/X-ray/stargazers)
-[![License](https://img.shields.io/github/license/DanOps-1/X-ray?style=flat-square)](https://github.com/DanOps-1/X-ray/blob/main/LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/DanOps-1/X-ray?style=flat-square)](https://github.com/DanOps-1/X-ray/commits/main)
-[![Platform](https://img.shields.io/badge/platform-Linux-blue?style=flat-square)](https://github.com/DanOps-1/X-ray)
+# 🚀 Xray VPN OneClick
+
+<h3>一键部署 Xray VLESS+Reality 代理服务器</h3>
+
+<p align="center">
+  <strong>最新协议 | 安全可靠 | 5分钟部署 | 全平台支持</strong>
+</p>
+
+[![GitHub Stars](https://img.shields.io/github/stars/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&logo=github&color=yellow)](https://github.com/DanOps-1/Xray-VPN-OneClick/stargazers)
+[![License](https://img.shields.io/github/license/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&color=blue)](https://github.com/DanOps-1/Xray-VPN-OneClick/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&color=green)](https://github.com/DanOps-1/Xray-VPN-OneClick/commits/main)
+[![Language](https://img.shields.io/github/languages/top/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&color=orange)](https://github.com/DanOps-1/Xray-VPN-OneClick)
+
+[![Platform](https://img.shields.io/badge/Platform-Linux-blue?style=for-the-badge&logo=linux)](https://github.com/DanOps-1/Xray-VPN-OneClick)
+[![Protocol](https://img.shields.io/badge/Protocol-VLESS%2BReality-purple?style=for-the-badge)](https://github.com/XTLS/REALITY)
+[![Docker](https://img.shields.io/badge/Docker-Supported-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
 [**中文**](README.md) | [**English**](docs/README-en.md)
 
-**快速部署 Xray-core VLESS + XTLS-Reality 代理服务器**
-
-本项目提供完全自动化的 Xray 服务端配置脚本和详细教程，支持一键部署，无需手动配置。适合需要搭建私有代理服务器的用户。
+</div>
 
 ---
 
-## ✨ 主要特性
+## 📑 目录
 
-- ✅ **完全自动化** - 一键安装，无需用户输入，5分钟内完成部署
-- 🔒 **安全可靠** - 使用最新的 VLESS + XTLS-Reality 协议，难以被检测
-- 📱 **全平台支持** - 兼容 Windows、macOS、Linux、Android、iOS 所有主流平台
-- 🚀 **性能优化** - 内置 BBR 拥塞控制、TCP Fast Open 等性能优化
-- 📚 **详细文档** - 完整的中英文安装、配置和故障排查指南
-- 🛠️ **管理工具** - 提供用户管理、服务更新、配置备份等便捷工具
-- 🌍 **多语言** - 支持中英文文档和脚本输出
-- 🐳 **Docker 支持** - 提供 Docker 容器化部署方案
+- [✨ 项目简介](#-项目简介)
+- [🎯 主要特性](#-主要特性)
+- [🆚 协议对比](#-协议对比)
+- [🚀 快速开始](#-快速开始)
+  - [系统要求](#系统要求)
+  - [一键安装](#一键安装推荐)
+- [📱 客户端配置](#-客户端配置)
+- [🛠️ 服务管理](#️-服务管理)
+- [🗑️ 卸载与清理](#️-卸载与清理)
+- [📖 详细文档](#-详细文档)
+- [🔒 安全建议](#-安全建议)
+- [📊 支持的云平台](#-支持的云平台)
+- [💡 常见问题](#-常见问题)
+- [🤝 贡献指南](#-贡献指南)
+- [📄 许可证](#-许可证)
+- [⚠️ 免责声明](#️-免责声明)
+
+---
+
+## ✨ 项目简介
+
+**Xray VPN OneClick** 是一个完全自动化的 Xray 服务端部署项目，使用最新的 **VLESS + XTLS-Reality** 协议，为用户提供安全、高速、难以被检测的代理服务。
+
+### 为什么选择本项目？
+
+| 特点 | 说明 |
+|------|------|
+| 🎯 **零配置部署** | 一行命令完成安装，自动生成所有配置参数 |
+| 🔐 **顶级安全** | 使用 Reality 协议，流量特征与正常 TLS 无法区分 |
+| ⚡ **高性能** | 内置 BBR 拥塞控制和 TCP Fast Open 优化 |
+| 📱 **全平台兼容** | 支持 Windows、macOS、Linux、Android、iOS |
+| 🛠️ **完善工具** | 提供用户管理、备份恢复、一键更新等工具 |
+| 📚 **详尽文档** | 完整的中英文文档和故障排查指南 |
+
+---
+
+## 🎯 主要特性
+
+<table>
+<tr>
+<td width="50%">
+
+### 🚀 部署特性
+- ✅ **一键安装** - 5分钟内完成部署
+- ✅ **自动配置** - UUID、密钥自动生成
+- ✅ **systemd 集成** - 开机自启动
+- ✅ **多种安装方式** - wget、curl、git clone
+- ✅ **国内加速** - 提供镜像加速下载
+
+</td>
+<td width="50%">
+
+### 🔒 安全特性
+- ✅ **VLESS 协议** - 轻量级高性能
+- ✅ **Reality 伪装** - 流量难以识别
+- ✅ **x25519 密钥** - 强加密保护
+- ✅ **Short ID** - 增强安全性
+- ✅ **防重放攻击** - 内置保护机制
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🛠️ 管理特性
+- ✅ **用户管理** - 添加/删除用户
+- ✅ **配置备份** - 自动备份恢复
+- ✅ **一键更新** - 升级到最新版本
+- ✅ **查看配置** - 显示连接信息
+- ✅ **安全卸载** - 完整清理系统
+
+</td>
+<td width="50%">
+
+### 📱 客户端特性
+- ✅ **分享链接** - 自动生成 VLESS URL
+- ✅ **二维码** - 扫码快速导入
+- ✅ **全平台** - 主流系统全覆盖
+- ✅ **多协议** - 兼容 v2ray 生态
+- ✅ **详细教程** - 分平台配置指南
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🆚 协议对比
+
+| 协议 | 速度 | 安全性 | 抗检测 | 配置难度 | 推荐度 |
+|------|------|--------|--------|----------|--------|
+| **VLESS+Reality** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ **推荐** |
+| VMess+WebSocket+TLS | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⚠️ 一般 |
+| Shadowsocks | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⚠️ 易封锁 |
+| Trojan | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ✅ 可选 |
+| V2Ray (传统) | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ❌ 过时 |
+
+**VLESS+Reality 优势：**
+- 🎯 流量特征与真实 TLS 1.3 连接完全相同
+- 🎯 无需购买域名和配置证书
+- 🎯 性能损耗极小，接近直连速度
+- 🎯 主动探测无法识别代理特征
 
 ---
 
@@ -30,34 +134,52 @@
 
 ### 系统要求
 
-- **操作系统**: Linux（支持 Ubuntu、Debian、CentOS、Kali 等发行版）
-- **最低配置**: 512MB 内存、100MB 存储空间
-- **推荐配置**: 1GB 内存、1核 CPU、10Mbps 带宽
-- **网络要求**: 具有公网 IP 地址
+<table>
+<tr>
+<td width="50%">
+
+#### 最低配置
+- **操作系统**: Linux (Debian/Ubuntu/CentOS/Kali)
+- **内存**: 512 MB RAM
+- **存储**: 100 MB 可用空间
+- **网络**: 公网 IP 地址
+
+</td>
+<td width="50%">
+
+#### 推荐配置
+- **操作系统**: Ubuntu 22.04 LTS / Debian 12
+- **内存**: 1 GB RAM
+- **CPU**: 1 核心
+- **带宽**: 10 Mbps+
+
+</td>
+</tr>
+</table>
 
 ### 一键安装（推荐）
 
-**方式一：直接下载（国外服务器）**
+#### 方式一：直接下载（国外服务器）
 
 ```bash
-wget https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/install.sh -O xray-install.sh
+wget https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh -O xray-install.sh
 sudo bash xray-install.sh
 ```
 
 或者使用 curl：
 
 ```bash
-curl -O https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/install.sh
+curl -O https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh
 sudo bash install.sh
 ```
 
-**方式二：加速下载（国内服务器或网络受限）**
+#### 方式二：加速下载（国内服务器或网络受限）
 
 如果上述命令连接超时，使用以下加速方法：
 
 ```bash
 # 使用 GitHub 代理加速
-wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/install.sh -O xray-install.sh
+wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh -O xray-install.sh
 sudo bash xray-install.sh
 ```
 
@@ -65,21 +187,21 @@ sudo bash xray-install.sh
 
 ```bash
 # jsDelivr CDN 加速
-wget https://cdn.jsdelivr.net/gh/DanOps-1/X-ray@main/scripts/install.sh -O xray-install.sh
+wget https://cdn.jsdelivr.net/gh/DanOps-1/Xray-VPN-OneClick@main/scripts/install.sh -O xray-install.sh
 sudo bash xray-install.sh
 ```
 
-**方式三：克隆仓库（推荐）**
+#### 方式三：克隆仓库（最完整）
 
 ```bash
 # 直接克隆
-git clone https://github.com/DanOps-1/X-ray.git
-cd X-ray/scripts
+git clone https://github.com/DanOps-1/Xray-VPN-OneClick.git
+cd Xray-VPN-OneClick/scripts
 sudo bash install.sh
 
 # 如果 git clone 也超时，使用代理
-git clone https://ghproxy.com/https://github.com/DanOps-1/X-ray.git
-cd X-ray/scripts
+git clone https://ghproxy.com/https://github.com/DanOps-1/Xray-VPN-OneClick.git
+cd Xray-VPN-OneClick/scripts
 sudo bash install.sh
 ```
 
@@ -175,32 +297,32 @@ sudo journalctl -u xray -n 100
 
 ```bash
 # 添加新用户
-sudo bash /home/kali/X-ray/scripts/add-user.sh user@example.com
+sudo bash scripts/add-user.sh user@example.com
 
 # 删除用户
-sudo bash /home/kali/X-ray/scripts/del-user.sh user@example.com
+sudo bash scripts/del-user.sh user@example.com
 
 # 列出所有用户
-sudo bash /home/kali/X-ray/scripts/show-config.sh users
+sudo bash scripts/show-config.sh users
 
 # 显示用户的分享链接
-sudo bash /home/kali/X-ray/scripts/show-config.sh link user@example.com
+sudo bash scripts/show-config.sh link user@example.com
 ```
 
 ### 系统维护
 
 ```bash
 # 更新 Xray 到最新版本
-sudo bash /home/kali/X-ray/scripts/update.sh
+sudo bash scripts/update.sh
 
 # 备份当前配置
-sudo bash /home/kali/X-ray/scripts/backup.sh
+sudo bash scripts/backup.sh
 
 # 恢复配置
-sudo bash /home/kali/X-ray/scripts/restore.sh <备份文件>
+sudo bash scripts/restore.sh <备份文件>
 
 # 卸载 Xray
-sudo bash /home/kali/X-ray/scripts/uninstall.sh
+sudo bash scripts/uninstall.sh
 ```
 
 ---
@@ -213,10 +335,10 @@ sudo bash /home/kali/X-ray/scripts/uninstall.sh
 
 ```bash
 # 如果克隆了仓库
-sudo bash /home/kali/X-ray/scripts/uninstall.sh
+sudo bash scripts/uninstall.sh
 
 # 如果没有仓库，下载卸载脚本
-wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/uninstall.sh
+wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/uninstall.sh
 sudo bash uninstall.sh
 ```
 
@@ -268,7 +390,7 @@ sudo systemctl daemon-reload
 sudo rm -rf /var/backups/xray
 
 # 删除项目目录（如果克隆了仓库）
-rm -rf ~/X-ray
+rm -rf ~/Xray-VPN-OneClick
 ```
 
 ### 验证清理结果
@@ -543,7 +665,7 @@ sudo sysctl -p
 
 ### 如何获取支持
 
-- 📧 **提交 Issue**: [GitHub Issues](https://github.com/DanOps-1/X-ray/issues)
+- 📧 **提交 Issue**: [GitHub Issues](https://github.com/DanOps-1/Xray-VPN-OneClick/issues)
 - 💡 **常见问题**: 查看 [FAQ 文档](docs/installation-guide.md#常见问题)
 - 📖 **阅读文档**: 完整的 [安装和配置教程](docs/installation-guide.md)
 - 🔍 **搜索已有问题**: 在提问前先搜索是否有相同问题
@@ -560,6 +682,12 @@ sudo sysctl -p
 
 ---
 
+<div align="center">
+
 **⭐ 如果这个项目对你有帮助，请给一个 Star 支持一下！**
 
 **🔄 也欢迎 Fork 和分享给需要的朋友！**
+
+Made with ❤️ by [DanOps-1](https://github.com/DanOps-1)
+
+</div>
