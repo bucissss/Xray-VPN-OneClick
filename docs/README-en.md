@@ -183,6 +183,92 @@ sudo bash scripts/uninstall.sh
 
 ---
 
+## 🗑️ Uninstall and Cleanup
+
+### One-Click Uninstall (Recommended)
+
+Use the provided uninstall script to safely remove Xray:
+
+```bash
+# If you cloned the repository
+sudo bash scripts/uninstall.sh
+
+# If you don't have the repository, download the uninstall script
+wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/uninstall.sh
+sudo bash uninstall.sh
+```
+
+**Uninstall Process:**
+
+1. Confirm uninstall: Type `yes` to confirm
+2. Choose whether to keep config backup:
+   - Type `Y` or press Enter: Keep backup in `/var/backups/xray/`
+   - Type `n`: Don't keep backup
+
+**Automatic Cleanup:**
+- ✅ Stop and disable Xray service
+- ✅ Backup configuration files (optional)
+- ✅ Uninstall Xray-core program
+- ✅ Remove config directory `/usr/local/etc/xray`
+- ✅ Remove log directory `/var/log/xray`
+- ✅ Remove systemd service files
+
+### Manual Cleanup
+
+If the uninstall script doesn't work, manually execute these commands:
+
+```bash
+# 1. Stop and disable service
+sudo systemctl stop xray
+sudo systemctl disable xray
+
+# 2. Backup configuration (optional)
+sudo mkdir -p /var/backups/xray
+sudo cp /usr/local/etc/xray/config.json /var/backups/xray/config-backup-$(date +%Y%m%d).json
+
+# 3. Uninstall Xray using official script
+bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge
+
+# 4. Remove residual files
+sudo rm -rf /usr/local/etc/xray
+sudo rm -rf /var/log/xray
+sudo rm -f /etc/systemd/system/xray.service
+sudo rm -f /etc/systemd/system/xray@.service
+sudo systemctl daemon-reload
+```
+
+### Complete Cleanup (Including Backups)
+
+To completely remove all related files:
+
+```bash
+# Remove configuration backups
+sudo rm -rf /var/backups/xray
+
+# Remove project directory (if cloned)
+rm -rf ~/X-ray
+```
+
+### Verify Cleanup
+
+After uninstall, run these commands to verify cleanup:
+
+```bash
+# Check service status (should show "could not be found")
+systemctl status xray
+
+# Check if program exists (should have no output)
+which xray
+
+# Check config directory (should not exist)
+ls /usr/local/etc/xray
+
+# Check port usage (port 443 should be free)
+sudo lsof -i :443
+```
+
+---
+
 ## 📖 Documentation
 
 - [Complete Installation Guide](installation-guide.md) - Detailed installation and configuration steps

@@ -205,6 +205,92 @@ sudo bash /home/kali/X-ray/scripts/uninstall.sh
 
 ---
 
+## 🗑️ 卸载与清理
+
+### 一键卸载（推荐）
+
+使用提供的卸载脚本可以安全地卸载 Xray：
+
+```bash
+# 如果克隆了仓库
+sudo bash /home/kali/X-ray/scripts/uninstall.sh
+
+# 如果没有仓库，下载卸载脚本
+wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/uninstall.sh
+sudo bash uninstall.sh
+```
+
+**卸载过程：**
+
+1. 确认卸载：输入 `yes` 确认
+2. 选择是否保留配置备份：
+   - 输入 `Y` 或回车：保留备份到 `/var/backups/xray/`
+   - 输入 `n`：不保留备份
+
+**自动清理内容：**
+- ✅ 停止并禁用 Xray 服务
+- ✅ 备份配置文件（可选）
+- ✅ 卸载 Xray-core 程序
+- ✅ 删除配置目录 `/usr/local/etc/xray`
+- ✅ 删除日志目录 `/var/log/xray`
+- ✅ 删除 systemd 服务文件
+
+### 手动清理
+
+如果卸载脚本无法使用，可以手动执行以下命令：
+
+```bash
+# 1. 停止并禁用服务
+sudo systemctl stop xray
+sudo systemctl disable xray
+
+# 2. 备份配置（可选）
+sudo mkdir -p /var/backups/xray
+sudo cp /usr/local/etc/xray/config.json /var/backups/xray/config-backup-$(date +%Y%m%d).json
+
+# 3. 使用官方脚本卸载 Xray
+bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ remove --purge
+
+# 4. 删除残留文件
+sudo rm -rf /usr/local/etc/xray
+sudo rm -rf /var/log/xray
+sudo rm -f /etc/systemd/system/xray.service
+sudo rm -f /etc/systemd/system/xray@.service
+sudo systemctl daemon-reload
+```
+
+### 彻底清理（包括备份）
+
+如果要完全删除所有相关文件：
+
+```bash
+# 删除配置备份
+sudo rm -rf /var/backups/xray
+
+# 删除项目目录（如果克隆了仓库）
+rm -rf ~/X-ray
+```
+
+### 验证清理结果
+
+卸载后运行以下命令检查是否清理干净：
+
+```bash
+# 检查服务状态（应该显示 "could not be found"）
+systemctl status xray
+
+# 检查程序是否存在（应该没有输出）
+which xray
+
+# 检查配置目录（应该不存在）
+ls /usr/local/etc/xray
+
+# 检查端口占用（443 端口应该空闲）
+sudo lsof -i :443
+```
+
+---
+
 ## 📖 详细文档
 
 - [完整安装教程](docs/installation-guide.md) - 手动安装的详细步骤说明
