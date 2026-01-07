@@ -427,4 +427,4 @@ sudo journalctl -u xray --since today | grep "accepted"
 
 ---
 
-**Need help?** Submit an [Issue](https://github.com/DanOps-1/X-ray/issues)
+**Need help?** Submit an [Issue](https://github.com/DanOps-1/Xray-VPN-OneClick/issues)

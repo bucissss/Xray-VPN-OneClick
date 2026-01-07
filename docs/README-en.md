@@ -1,57 +1,185 @@
-# Xray One-Click Configuration Script
+<div align="center">
 
-[![GitHub Stars](https://img.shields.io/github/stars/DanOps-1/X-ray?style=flat-square)](https://github.com/DanOps-1/X-ray/stargazers)
-[![License](https://img.shields.io/github/license/DanOps-1/X-ray?style=flat-square)](https://github.com/DanOps-1/X-ray/blob/main/LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/DanOps-1/X-ray?style=flat-square)](https://github.com/DanOps-1/X-ray/commits/main)
-[![Platform](https://img.shields.io/badge/platform-Linux-blue?style=flat-square)](https://github.com/DanOps-1/X-ray)
+# 🚀 Xray VPN OneClick
+
+<h3>One-Click Xray VLESS+Reality Proxy Server Deployment</h3>
+
+<p align="center">
+  <strong>Latest Protocol | Secure & Reliable | 5-Min Setup | Cross-Platform</strong>
+</p>
+
+[![GitHub Stars](https://img.shields.io/github/stars/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&logo=github&color=yellow)](https://github.com/DanOps-1/Xray-VPN-OneClick/stargazers)
+[![License](https://img.shields.io/github/license/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&color=blue)](https://github.com/DanOps-1/Xray-VPN-OneClick/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&color=green)](https://github.com/DanOps-1/Xray-VPN-OneClick/commits/main)
+[![Language](https://img.shields.io/github/languages/top/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&color=orange)](https://github.com/DanOps-1/Xray-VPN-OneClick)
+
+[![Platform](https://img.shields.io/badge/Platform-Linux-blue?style=for-the-badge&logo=linux)](https://github.com/DanOps-1/Xray-VPN-OneClick)
+[![Protocol](https://img.shields.io/badge/Protocol-VLESS%2BReality-purple?style=for-the-badge)](https://github.com/XTLS/REALITY)
+[![Docker](https://img.shields.io/badge/Docker-Supported-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
 [**中文**](../README.md) | [**English**](README-en.md)
 
-**Quickly deploy Xray-core VLESS + XTLS-Reality proxy server**
-
-This project provides fully automated Xray server configuration scripts and detailed tutorials. One-click deployment with no manual configuration required.
+</div>
 
 ---
 
-## ✨ Key Features
+## 📑 Table of Contents
 
-- ✅ **Fully Automated** - One-click installation, no user input needed
-- 🔒 **Secure & Reliable** - Uses latest VLESS + XTLS-Reality protocol
-- 📱 **Cross-Platform** - Compatible with Windows, macOS, Linux, Android, iOS
-- 🚀 **Performance Optimized** - Built-in BBR, TCP Fast Open optimizations
-- 📚 **Detailed Documentation** - Complete installation, configuration and troubleshooting guides
-- 🛠️ **Management Tools** - User management, service updates, configuration backup tools
-- 🌍 **Multi-Language** - English and Chinese documentation
-- 🐳 **Docker Support** - Docker deployment option available
+- [✨ Introduction](#-introduction)
+- [🎯 Key Features](#-key-features)
+- [🆚 Protocol Comparison](#-protocol-comparison)
+- [🚀 Quick Start](#-quick-start)
+  - [System Requirements](#system-requirements)
+  - [One-Click Installation](#one-click-installation-recommended)
+- [📱 Client Configuration](#-client-configuration)
+- [🛠️ Service Management](#️-service-management)
+- [🗑️ Uninstall & Cleanup](#️-uninstall--cleanup)
+- [📖 Documentation](#-documentation)
+- [🔒 Security Recommendations](#-security-recommendations)
+- [📊 Supported Cloud Platforms](#-supported-cloud-platforms)
+- [💡 FAQ](#-faq)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [⚠️ Disclaimer](#️-disclaimer)
+
+---
+
+## ✨ Introduction
+
+**Xray VPN OneClick** is a fully automated Xray server deployment project using the latest **VLESS + XTLS-Reality** protocol, providing secure, high-speed, and hard-to-detect proxy services.
+
+### Why Choose This Project?
+
+| Feature | Description |
+|---------|-------------|
+| 🎯 **Zero-Config Deployment** | Complete installation with one command, auto-generate all parameters |
+| 🔐 **Top-Level Security** | Reality protocol makes traffic indistinguishable from normal TLS |
+| ⚡ **High Performance** | Built-in BBR congestion control and TCP Fast Open optimization |
+| 📱 **Cross-Platform** | Supports Windows, macOS, Linux, Android, iOS |
+| 🛠️ **Complete Tools** | User management, backup/restore, one-click updates |
+| 📚 **Comprehensive Docs** | Complete bilingual documentation and troubleshooting guides |
+
+---
+
+## 🎯 Key Features
+
+<table>
+<tr>
+<td width="50%">
+
+### 🚀 Deployment Features
+- ✅ **One-Click Install** - Deploy in 5 minutes
+- ✅ **Auto-Configuration** - UUID & keys auto-generated
+- ✅ **systemd Integration** - Auto-start on boot
+- ✅ **Multiple Install Methods** - wget, curl, git clone
+- ✅ **China Acceleration** - Mirror acceleration available
+
+</td>
+<td width="50%">
+
+### 🔒 Security Features
+- ✅ **VLESS Protocol** - Lightweight & high-performance
+- ✅ **Reality Camouflage** - Traffic hard to identify
+- ✅ **x25519 Keys** - Strong encryption
+- ✅ **Short ID** - Enhanced security
+- ✅ **Anti-Replay** - Built-in protection
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 🛠️ Management Features
+- ✅ **User Management** - Add/delete users
+- ✅ **Config Backup** - Auto backup & restore
+- ✅ **One-Click Update** - Upgrade to latest version
+- ✅ **View Config** - Display connection info
+- ✅ **Safe Uninstall** - Complete system cleanup
+
+</td>
+<td width="50%">
+
+### 📱 Client Features
+- ✅ **Share Links** - Auto-generate VLESS URLs
+- ✅ **QR Codes** - Quick scan import
+- ✅ **All Platforms** - Major systems covered
+- ✅ **Multi-Protocol** - v2ray ecosystem compatible
+- ✅ **Detailed Guides** - Platform-specific tutorials
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🆚 Protocol Comparison
+
+| Protocol | Speed | Security | Anti-Detection | Config Difficulty | Recommendation |
+|----------|-------|----------|----------------|-------------------|----------------|
+| **VLESS+Reality** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ **Recommended** |
+| VMess+WS+TLS | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⚠️ Average |
+| Shadowsocks | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⚠️ Easily Blocked |
+| Trojan | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ✅ Alternative |
+| V2Ray (Legacy) | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ❌ Outdated |
+
+**VLESS+Reality Advantages:**
+- 🎯 Traffic characteristics identical to real TLS 1.3 connections
+- 🎯 No need to purchase domain or configure certificates
+- 🎯 Minimal performance overhead, near direct-connection speed
+- 🎯 Active probing cannot identify proxy characteristics
 
 ---
 
 ## 🚀 Quick Start
 
-### Method 1: One-Click Installation (Recommended)
+### System Requirements
 
-**Option A: Direct Download (For servers outside China)**
+<table>
+<tr>
+<td width="50%">
+
+#### Minimum Requirements
+- **OS**: Linux (Debian/Ubuntu/CentOS/Kali)
+- **RAM**: 512 MB
+- **Storage**: 100 MB available
+- **Network**: Public IP address
+
+</td>
+<td width="50%">
+
+#### Recommended Configuration
+- **OS**: Ubuntu 22.04 LTS / Debian 12
+- **RAM**: 1 GB
+- **CPU**: 1 core
+- **Bandwidth**: 10 Mbps+
+
+</td>
+</tr>
+</table>
+
+### One-Click Installation (Recommended)
+
+#### Option A: Direct Download (Servers outside China)
 
 ```bash
-# Download and run the automated installation script
-wget https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/install.sh -O xray-install.sh
+wget https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh -O xray-install.sh
 sudo bash xray-install.sh
 ```
 
 Or using curl:
 
 ```bash
-curl -O https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/install.sh
+curl -O https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh
 sudo bash install.sh
 ```
 
-**Option B: Accelerated Download (For China or restricted networks)**
+#### Option B: Accelerated Download (China or Restricted Networks)
 
-If the above commands timeout, use these acceleration methods:
+If above commands timeout, use these acceleration methods:
 
 ```bash
 # Using GitHub proxy
-wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/install.sh -O xray-install.sh
+wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh -O xray-install.sh
 sudo bash xray-install.sh
 ```
 
@@ -59,33 +187,58 @@ Or using jsDelivr CDN:
 
 ```bash
 # jsDelivr CDN acceleration
-wget https://cdn.jsdelivr.net/gh/DanOps-1/X-ray@main/scripts/install.sh -O xray-install.sh
+wget https://cdn.jsdelivr.net/gh/DanOps-1/Xray-VPN-OneClick@main/scripts/install.sh -O xray-install.sh
 sudo bash xray-install.sh
 ```
 
-**Option C: Clone Repository (Recommended)**
+#### Option C: Clone Repository (Most Complete)
 
 ```bash
 # Direct clone
-git clone https://github.com/DanOps-1/X-ray.git
-cd X-ray/scripts
+git clone https://github.com/DanOps-1/Xray-VPN-OneClick.git
+cd Xray-VPN-OneClick/scripts
 sudo bash install.sh
 
-# If git clone also times out, use proxy
-git clone https://ghproxy.com/https://github.com/DanOps-1/X-ray.git
-cd X-ray/scripts
+# If git clone times out, use proxy
+git clone https://ghproxy.com/https://github.com/DanOps-1/Xray-VPN-OneClick.git
+cd Xray-VPN-OneClick/scripts
 sudo bash install.sh
 ```
 
+### Installation Process
+
 The installation script will automatically:
-- ✅ Install the latest version of Xray-core
-- ✅ Generate configuration parameters (UUID, keys, Short ID)
-- ✅ Create and enable systemd service
-- ✅ Display client configuration info and share link
 
-### Method 2: Manual Installation
+1. ✅ Detect system environment and install dependencies
+2. ✅ Download and install latest Xray-core
+3. ✅ Auto-generate configuration parameters (UUID, keys, Short ID)
+4. ✅ Create optimized server configuration
+5. ✅ Configure and start systemd service
+6. ✅ Display client configuration info and share link
 
-See **[Complete Installation Guide](installation-guide.md)** for detailed steps.
+### After Installation
+
+Upon completion, the script outputs:
+
+```
+================================
+✅ Xray Installation Successful!
+================================
+
+📋 Server Information:
+Address: YOUR_SERVER_IP
+Port: 443
+
+🔑 Client Configuration:
+UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+Public Key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+...
+
+📱 Share Link:
+vless://xxxxxxxx@YOUR_IP:443?...
+```
+
+**Save this information** for client configuration.
 
 ---
 
@@ -95,80 +248,68 @@ See **[Complete Installation Guide](installation-guide.md)** for detailed steps.
 
 | Platform | Recommended Client | Download Link |
 |----------|-------------------|---------------|
-| **Windows** | v2rayN | [GitHub](https://github.com/2dust/v2rayN/releases) |
-| **macOS** | V2rayU / V2RayXS | [V2rayU](https://github.com/yanue/V2rayU/releases) / [V2RayXS](https://github.com/tzmax/V2RayXS/releases) |
-| **Linux** | v2ray-core / Qv2ray | [v2ray](https://github.com/v2fly/v2ray-core/releases) / [Qv2ray](https://github.com/Qv2ray/Qv2ray/releases) |
-| **Android** | v2rayNG | [GitHub](https://github.com/2dust/v2rayNG/releases) |
-| **iOS** | Shadowrocket / Quantumult X | App Store |
+| **Windows** | v2rayN | [GitHub Releases](https://github.com/2dust/v2rayN/releases) |
+| **macOS** | V2rayU / V2RayXS | [V2rayU](https://github.com/yanue/V2rayU/releases) \| [V2RayXS](https://github.com/tzmax/V2RayXS/releases) |
+| **Linux** | v2ray-core / Qv2ray | [v2ray](https://github.com/v2fly/v2ray-core/releases) \| [Qv2ray](https://github.com/Qv2ray/Qv2ray/releases) |
+| **Android** | v2rayNG | [GitHub Releases](https://github.com/2dust/v2rayNG/releases) |
+| **iOS** | Shadowrocket / Quantumult X | App Store (US Account Required) |
 
 ### Quick Import
 
-The installation script generates a VLESS share link. In your client:
-1. Copy the share link
-2. Open client → "Import from Clipboard"
-3. Connect and start using
+**Option 1: Using Share Link (Recommended)**
 
-Detailed guide: [Client Setup Guide](client-setup.md)
+1. Copy the VLESS share link from installation output
+2. Open client application
+3. Select "Import from Clipboard" or "Scan QR Code"
+4. Connect and start using
 
----
+**Option 2: Manual Configuration**
 
-## 📂 Project Structure
-
-```
-X-ray/
-├── README.md                           # Project documentation (English)
-├── docs/
-│   ├── README-zh.md                    # Project documentation (Chinese)
-│   ├── installation-guide.md           # Complete installation tutorial
-│   ├── client-setup.md                 # Client configuration guide
-│   └── user-management.md              # User management guide
-├── examples/
-│   ├── config.json                     # Basic configuration template
-│   └── config-multiple-users.json      # Multi-user configuration
-└── scripts/
-    ├── install.sh                      # One-click installation
-    ├── add-user.sh                     # Add user
-    ├── del-user.sh                     # Delete user
-    ├── show-config.sh                  # Show configuration
-    ├── update.sh                       # Update Xray
-    ├── uninstall.sh                    # Uninstall Xray
-    ├── backup.sh                       # Backup configuration
-    └── generate-link.py                # Generate share link
-```
+See detailed tutorial: [Client Setup Guide](client-setup.md)
 
 ---
 
-## 🛠️ Management Tools
+## 🛠️ Service Management
+
+### Basic Commands
+
+```bash
+# Check service status
+sudo systemctl status xray
+
+# Start service
+sudo systemctl start xray
+
+# Stop service
+sudo systemctl stop xray
+
+# Restart service
+sudo systemctl restart xray
+
+# View live logs
+sudo journalctl -u xray -f
+
+# View recent logs
+sudo journalctl -u xray -n 100
+```
 
 ### User Management
 
 ```bash
 # Add new user
-sudo bash scripts/add-user.sh <user-email>
+sudo bash scripts/add-user.sh user@example.com
 
 # Delete user
-sudo bash scripts/del-user.sh <user-email>
+sudo bash scripts/del-user.sh user@example.com
 
 # List all users
 sudo bash scripts/show-config.sh users
+
+# Show user's share link
+sudo bash scripts/show-config.sh link user@example.com
 ```
 
-### Service Management
-
-```bash
-# Start/Stop/Restart service
-sudo systemctl start xray
-sudo systemctl stop xray
-sudo systemctl restart xray
-
-# Check service status
-sudo systemctl status xray
-
-# View live logs
-sudo journalctl -u xray -f
-```
-
-### Maintenance
+### System Maintenance
 
 ```bash
 # Update Xray to latest version
@@ -177,13 +318,16 @@ sudo bash scripts/update.sh
 # Backup current configuration
 sudo bash scripts/backup.sh
 
+# Restore configuration
+sudo bash scripts/restore.sh <backup-file>
+
 # Uninstall Xray
 sudo bash scripts/uninstall.sh
 ```
 
 ---
 
-## 🗑️ Uninstall and Cleanup
+## 🗑️ Uninstall & Cleanup
 
 ### One-Click Uninstall (Recommended)
 
@@ -194,7 +338,7 @@ Use the provided uninstall script to safely remove Xray:
 sudo bash scripts/uninstall.sh
 
 # If you don't have the repository, download the uninstall script
-wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/uninstall.sh
+wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/uninstall.sh
 sudo bash uninstall.sh
 ```
 
@@ -246,7 +390,7 @@ To completely remove all related files:
 sudo rm -rf /var/backups/xray
 
 # Remove project directory (if cloned)
-rm -rf ~/X-ray
+rm -rf ~/Xray-VPN-OneClick
 ```
 
 ### Verify Cleanup
@@ -281,47 +425,143 @@ sudo lsof -i :443
 
 ## 🔒 Security Recommendations
 
-1. ✅ Regularly rotate UUID and keys (every 3-6 months recommended)
-2. ✅ Use strong passwords and non-standard ports
-3. ✅ Enable firewall to restrict access sources
-4. ✅ Keep Xray updated to latest version
-5. ✅ Monitor logs for abnormal access
-6. ✅ Regularly backup configuration files
+### Basic Security Measures
+
+1. ✅ **Rotate Keys Regularly** - Recommended every 3-6 months for UUID and keys
+2. ✅ **Use Strong Passwords** - Set strong passwords or key authentication for SSH
+3. ✅ **Configure Firewall** - Only open necessary ports (443)
+4. ✅ **Regular Updates** - Keep Xray updated to latest version
+5. ✅ **Monitor Logs** - Regularly check logs for abnormal access
+6. ✅ **Backup Configs** - Regular backups to secure locations
+
+### Advanced Security Configuration
+
+```bash
+# Restrict SSH access
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw enable
+
+# Disable root login (recommended)
+sudo nano /etc/ssh/sshd_config
+# Set: PermitRootLogin no
+sudo systemctl restart sshd
+
+# Configure automatic security updates
+sudo apt install unattended-upgrades
+sudo dpkg-reconfigure --priority=low unattended-upgrades
+```
 
 ---
 
-## 📊 System Requirements
+## 📊 Supported Cloud Platforms
 
-### Minimum Requirements
-- **OS**: Linux (Debian, Ubuntu, CentOS, Kali, etc.)
-- **Memory**: 512 MB RAM
-- **Storage**: 100 MB available space
-- **Network**: Public IP address
+This project has been tested on the following cloud platforms:
 
-### Recommended Configuration
-- **OS**: Ubuntu 22.04 LTS / Debian 12
-- **Memory**: 1 GB RAM
-- **CPU**: 1 core
-- **Network**: 10 Mbps+ bandwidth
+### International Cloud Platforms
+- ✅ **AWS EC2** - Amazon Web Services
+- ✅ **Google Cloud Platform** - GCP Compute Engine
+- ✅ **Microsoft Azure** - Azure Virtual Machines
+- ✅ **DigitalOcean** - Droplets
+- ✅ **Vultr** - Cloud Compute
+- ✅ **Linode** - Akamai Cloud
+- ✅ **Hetzner** - Cloud Servers
 
-### Supported Cloud Platforms
-- ✅ AWS EC2
-- ✅ Google Cloud Platform
-- ✅ Microsoft Azure
-- ✅ DigitalOcean
-- ✅ Vultr
-- ✅ Linode
-- ✅ Alibaba Cloud, Tencent Cloud, etc.
+### Chinese Cloud Platforms
+- ✅ **Alibaba Cloud** - ECS
+- ✅ **Tencent Cloud** - CVM
+- ✅ **Huawei Cloud** - ECS
+
+> **Note**: Using on Chinese cloud platforms may face compliance risks, choose carefully.
 
 ---
 
 ## 🐳 Docker Deployment
 
+### Using Docker
+
 ```bash
-# Deploy using Docker (in development)
+# Pull image (in development)
 docker pull danops/xray-reality
-docker run -d --name xray -p 443:443 danops/xray-reality
+
+# Run container
+docker run -d \
+  --name xray \
+  -p 443:443 \
+  -v /etc/xray:/etc/xray \
+  --restart=unless-stopped \
+  danops/xray-reality
 ```
+
+### Using Docker Compose
+
+```yaml
+version: '3'
+services:
+  xray:
+    image: danops/xray-reality
+    container_name: xray
+    restart: unless-stopped
+    ports:
+      - "443:443"
+    volumes:
+      - ./config:/etc/xray
+```
+
+Detailed instructions: Coming soon
+
+---
+
+## 💡 FAQ
+
+### 1. Port 443 is already in use?
+
+```bash
+# Check which process is using the port
+sudo lsof -i :443
+
+# Stop the occupying service
+sudo systemctl stop nginx  # or other service
+
+# Or modify Xray config to use another port
+sudo nano /usr/local/etc/xray/config.json
+```
+
+### 2. Client cannot connect?
+
+**Troubleshooting Steps:**
+
+1. Confirm service is running: `sudo systemctl status xray`
+2. Check firewall rules: `sudo ufw status`
+3. Confirm cloud provider security group has opened port 443
+4. Verify configuration info is correct (UUID, public key, etc.)
+5. Check service logs: `sudo journalctl -u xray -f`
+
+### 3. How to change the target camouflage website?
+
+Edit config file `/usr/local/etc/xray/config.json`:
+
+```json
+"dest": "www.cloudflare.com:443",
+"serverNames": ["www.cloudflare.com"]
+```
+
+Recommended: `www.microsoft.com`, `www.apple.com`, `www.cloudflare.com`
+
+### 4. How to improve connection speed?
+
+```bash
+# Enable BBR congestion control
+echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+
+# Enable TCP Fast Open
+echo "net.ipv4.tcp_fastopen=3" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+```
+
+More questions: [Complete FAQ List](installation-guide.md#common-issues)
 
 ---
 
@@ -329,31 +569,52 @@ docker run -d --name xray -p 443:443 danops/xray-reality
 
 Issues and Pull Requests are welcome!
 
-1. Fork this project
-2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
+### Contributing Process
+
+1. Fork this project to your account
+2. Create feature branch: `git checkout -b feature/AmazingFeature`
+3. Commit your changes: `git commit -m 'Add some AmazingFeature'`
+4. Push to branch: `git push origin feature/AmazingFeature`
 5. Submit Pull Request
 
----
+### Contribution Suggestions
 
-## 📚 References
-
-- [Xray Official Documentation](https://xtls.github.io/)
-- [VLESS Protocol Specification](https://xtls.github.io/config/features/vless.html)
-- [Reality Protocol Introduction](https://github.com/XTLS/REALITY)
-- [Xray-core Source Code](https://github.com/XTLS/Xray-core)
+- 📝 Improve documentation and tutorials
+- 🐛 Fix bugs and issues
+- ✨ Add new features and tools
+- 🌍 Translate documentation to other languages
+- 📊 Optimize script performance
 
 ---
 
 ## 📝 Changelog
 
 ### v1.0.0 (2026-01-07)
-- ✅ Initial release
+
+**Initial Release**
+
 - ✅ Complete VLESS + XTLS-Reality configuration tutorial
-- ✅ One-click installation script
-- ✅ User management tools
-- ✅ Detailed documentation and examples
+- ✅ Fully automated one-click installation script
+- ✅ User management tools (add, delete, list)
+- ✅ Service maintenance tools (update, backup, uninstall)
+- ✅ Detailed bilingual documentation
+- ✅ Multi-platform client configuration guides
+- ✅ Performance optimization and security hardening guides
+
+---
+
+## 📚 References
+
+### Official Documentation
+- [Xray Official Website](https://xtls.github.io/)
+- [VLESS Protocol Specification](https://xtls.github.io/config/features/vless.html)
+- [Reality Protocol Introduction](https://github.com/XTLS/REALITY)
+- [Xray-core Source Code](https://github.com/XTLS/Xray-core)
+
+### Related Projects
+- [v2rayN (Windows Client)](https://github.com/2dust/v2rayN)
+- [v2rayNG (Android Client)](https://github.com/2dust/v2rayNG)
+- [V2rayU (macOS Client)](https://github.com/yanue/V2rayU)
 
 ---
 
@@ -361,7 +622,17 @@ Issues and Pull Requests are welcome!
 
 This project is licensed under the [MIT License](../LICENSE).
 
-**Important**: Please read the [NOTICE - Terms of Use and Disclaimer](../NOTICE) before using
+**Important**: Please read [NOTICE - Terms of Use and Disclaimer](../NOTICE) before using
+
+This means you can:
+- ✅ Freely use, copy, modify, and distribute this project
+- ✅ Use for commercial or non-commercial purposes (must comply with laws)
+- ✅ Freely modify under license terms
+
+But you must:
+- ⚠️ Retain original author's copyright notice
+- ⚠️ Provide license copy
+- ⚠️ Comply with restrictions in NOTICE file
 
 ---
 
@@ -392,11 +663,31 @@ This project is licensed under the [MIT License](../LICENSE).
 
 ## 💬 Support
 
-If you have questions or suggestions:
-- 📧 Submit an [Issue](https://github.com/DanOps-1/X-ray/issues)
-- 💡 Check the [FAQ](installation-guide.md#common-issues)
-- 📖 Read the [Complete Documentation](installation-guide.md)
+### How to Get Support
+
+- 📧 **Submit Issue**: [GitHub Issues](https://github.com/DanOps-1/Xray-VPN-OneClick/issues)
+- 💡 **FAQ**: Check [FAQ Documentation](installation-guide.md#common-issues)
+- 📖 **Read Docs**: Complete [Installation and Configuration Tutorial](installation-guide.md)
+- 🔍 **Search Existing Issues**: Search before asking if same issue exists
+
+### Issue Submission Guidelines
+
+Please provide the following information in your issue:
+
+1. Your operating system and version
+2. Xray version number
+3. Detailed problem description and error messages
+4. Related configuration files (hide sensitive information)
+5. Solutions you've already tried
 
 ---
 
+<div align="center">
+
 **⭐ If this project helps you, please give it a Star!**
+
+**🔄 Also welcome to Fork and share with friends!**
+
+Made with ❤️ by [DanOps-1](https://github.com/DanOps-1)
+
+</div>

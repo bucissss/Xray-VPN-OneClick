@@ -393,7 +393,7 @@ See [Performance Optimization Guide](installation-guide.md#performance-optimizat
 ## 🆘 Getting Help
 
 - Check [FAQ](installation-guide.md#common-issues)
-- Submit [Issue](https://github.com/DanOps-1/X-ray/issues)
+- Submit [Issue](https://github.com/DanOps-1/Xray-VPN-OneClick/issues)
 - Review server logs: `sudo journalctl -u xray -f`
 
 ---

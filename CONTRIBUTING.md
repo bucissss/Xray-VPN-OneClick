@@ -31,7 +31,7 @@ This project follows a simple code of conduct:
 ### 🐛 Reporting Bugs
 
 Before submitting a bug report:
-1. Check [existing issues](https://github.com/DanOps-1/X-ray/issues) to avoid duplicates
+1. Check [existing issues](https://github.com/DanOps-1/Xray-VPN-OneClick/issues) to avoid duplicates
 2. Test with the latest version
 3. Collect relevant information (OS, Xray version, error messages)
 
@@ -337,8 +337,8 @@ Test on multiple distributions when possible:
 
 ## Questions?
 
-- Open a [Discussion](https://github.com/DanOps-1/X-ray/discussions)
-- Ask in an [Issue](https://github.com/DanOps-1/X-ray/issues)
+- Open a [Discussion](https://github.com/DanOps-1/Xray-VPN-OneClick/discussions)
+- Ask in an [Issue](https://github.com/DanOps-1/Xray-VPN-OneClick/issues)
 - Check existing [Documentation](docs/)
 
 ---

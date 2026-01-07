@@ -1,9 +1,9 @@
 # Xray 服务端一键配置脚本
 
-[![GitHub Stars](https://img.shields.io/github/stars/DanOps-1/X-ray?style=flat-square)](https://github.com/DanOps-1/X-ray/stargazers)
-[![License](https://img.shields.io/github/license/DanOps-1/X-ray?style=flat-square)](https://github.com/DanOps-1/X-ray/blob/main/LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/DanOps-1/X-ray?style=flat-square)](https://github.com/DanOps-1/X-ray/commits/main)
-[![Platform](https://img.shields.io/badge/platform-Linux-blue?style=flat-square)](https://github.com/DanOps-1/X-ray)
+[![GitHub Stars](https://img.shields.io/github/stars/DanOps-1/Xray-VPN-OneClick?style=flat-square)](https://github.com/DanOps-1/Xray-VPN-OneClick/stargazers)
+[![License](https://img.shields.io/github/license/DanOps-1/Xray-VPN-OneClick?style=flat-square)](https://github.com/DanOps-1/Xray-VPN-OneClick/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/DanOps-1/Xray-VPN-OneClick?style=flat-square)](https://github.com/DanOps-1/Xray-VPN-OneClick/commits/main)
+[![Platform](https://img.shields.io/badge/platform-Linux-blue?style=flat-square)](https://github.com/DanOps-1/Xray-VPN-OneClick)
 
 [**中文**](../README.md) | [**English**](README-en.md)
 
@@ -40,14 +40,14 @@
 使用以下命令一键安装 Xray 服务端：
 
 ```bash
-wget https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/install.sh -O xray-install.sh
+wget https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh -O xray-install.sh
 sudo bash xray-install.sh
 ```
 
 或者使用 curl：
 
 ```bash
-curl -O https://raw.githubusercontent.com/DanOps-1/X-ray/main/scripts/install.sh
+curl -O https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh
 sudo bash install.sh
 ```
 
@@ -411,7 +411,7 @@ sudo sysctl -p
 
 ### 如何获取支持
 
-- 📧 **提交 Issue**: [GitHub Issues](https://github.com/DanOps-1/X-ray/issues)
+- 📧 **提交 Issue**: [GitHub Issues](https://github.com/DanOps-1/Xray-VPN-OneClick/issues)
 - 💡 **常见问题**: 查看 [FAQ 文档](installation-guide.md#常见问题)
 - 📖 **阅读文档**: 完整的 [安装和配置教程](installation-guide.md)
 - 🔍 **搜索已有问题**: 在提问前先搜索是否有相同问题
