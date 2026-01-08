@@ -122,28 +122,28 @@
 
 > **CRITICAL: Write tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T037 [P] [US2] Write unit test for systemctl command validation in tests/unit/services/systemd-manager.test.ts
-- [ ] T038 [P] [US2] Write unit test for service status parsing in tests/unit/services/systemd-manager.test.ts
-- [ ] T039 [P] [US2] Write integration test for service start/stop/restart in tests/integration/service-lifecycle.test.ts
-- [ ] T040 [P] [US2] Write integration test for graceful shutdown strategy in tests/integration/service-lifecycle.test.ts
+- [x] T037 [P] [US2] Write unit test for systemctl command validation in tests/unit/services/systemd-manager.test.ts
+- [x] T038 [P] [US2] Write unit test for service status parsing in tests/unit/services/systemd-manager.test.ts
+- [x] T039 [P] [US2] Write integration test for service start/stop/restart in tests/integration/service-lifecycle.test.ts
+- [x] T040 [P] [US2] Write integration test for graceful shutdown strategy in tests/integration/service-lifecycle.test.ts
 
 **Constitution Compliance Checks for Tests:**
-- [ ] T041 [US2] Security test: Verify command injection prevention (Principle I - HIGHEST PRIORITY)
-- [ ] T042 [US2] Security test: Verify permission detection (Principle I)
-- [ ] T043 [US2] Reliability test: Verify timeout handling (Principle III)
-- [ ] T044 [US2] Reliability test: Verify graceful shutdown < 10s (FR-016)
+- [x] T041 [US2] Security test: Verify command injection prevention (Principle I - HIGHEST PRIORITY)
+- [x] T042 [US2] Security test: Verify permission detection (Principle I)
+- [x] T043 [US2] Reliability test: Verify timeout handling (Principle III)
+- [x] T044 [US2] Reliability test: Verify graceful shutdown < 10s (FR-016)
 
 ### Implementation for User Story 2
 
-- [ ] T045 [P] [US2] Create SystemdManager class in src/services/systemd-manager.ts
-- [ ] T046 [US2] Implement isSystemdAvailable method in src/services/systemd-manager.ts
-- [ ] T047 [US2] Implement isRoot and canUseSudo methods in src/services/systemd-manager.ts
-- [ ] T048 [US2] Implement executeSystemctl method with spawn() in src/services/systemd-manager.ts (validate action/service name)
-- [ ] T049 [US2] Implement getStatus method (parse systemctl show output) in src/services/systemd-manager.ts
-- [ ] T050 [US2] Implement start method in src/services/systemd-manager.ts
-- [ ] T051 [US2] Implement stop method in src/services/systemd-manager.ts
-- [ ] T052 [US2] Implement restart method with graceful shutdown (10s timeout) in src/services/systemd-manager.ts
-- [ ] T053 [US2] Implement parseSystemdError method in src/services/systemd-manager.ts (map errors to suggestions)
+- [x] T045 [P] [US2] Create SystemdManager class in src/services/systemd-manager.ts
+- [x] T046 [US2] Implement isSystemdAvailable method in src/services/systemd-manager.ts
+- [x] T047 [US2] Implement isRoot and canUseSudo methods in src/services/systemd-manager.ts
+- [x] T048 [US2] Implement executeSystemctl method with spawn() in src/services/systemd-manager.ts (validate action/service name)
+- [x] T049 [US2] Implement getStatus method (parse systemctl show output) in src/services/systemd-manager.ts
+- [x] T050 [US2] Implement start method in src/services/systemd-manager.ts
+- [x] T051 [US2] Implement stop method in src/services/systemd-manager.ts
+- [x] T052 [US2] Implement restart method with graceful shutdown (10s timeout) in src/services/systemd-manager.ts
+- [x] T053 [US2] Implement parseSystemdError method in src/services/systemd-manager.ts (map errors to suggestions)
 - [ ] T054 [US2] Create service command handler in src/commands/service.ts (integrate with Commander.js)
 - [ ] T055 [US2] Add service status display to interactive menu in src/commands/interactive.ts
 - [ ] T056 [US2] Add service control actions (start/stop/restart) to interactive menu
