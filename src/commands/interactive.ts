@@ -11,7 +11,9 @@ import chalk from 'chalk';
 import logger from '../utils/logger';
 import { ExitCode } from '../constants/exit-codes';
 import { SystemdManager } from '../services/systemd-manager';
+import { UserManager } from '../services/user-manager';
 import { displayServiceStatus, startService, stopService, restartService } from './service';
+import { listUsers, addUser, deleteUser, showUserShare } from './user';
 
 /**
  * Menu options configuration
@@ -88,12 +90,17 @@ export async function getMenuContext(options: MenuOptions = {}): Promise<MenuCon
   const serviceName = options.serviceName || 'xray';
 
   try {
-    const manager = new SystemdManager(serviceName);
-    const status = await manager.getStatus();
+    const systemdManager = new SystemdManager(serviceName);
+    const userManager = new UserManager(options.configPath, serviceName);
+
+    const [status, users] = await Promise.all([
+      systemdManager.getStatus(),
+      userManager.listUsers(),
+    ]);
 
     return {
       serviceStatus: status.healthy ? 'active' : status.active ? status.subState : 'inactive',
-      userCount: 0, // TODO: Implement user count from config
+      userCount: users.length,
       lastUpdated: new Date(),
     };
   } catch (error) {
@@ -249,9 +256,8 @@ export async function handleMenuSelection(selection: string, options: MenuOption
       return false;
 
     case 'user':
-      logger.info('用户管理功能即将推出...');
-      await promptContinue();
-      return false;
+      // Show user management submenu
+      return await handleUserManagementMenu(options);
 
     case 'config':
       logger.info('配置管理功能即将推出...');
@@ -266,6 +272,63 @@ export async function handleMenuSelection(selection: string, options: MenuOption
     default:
       logger.warn(`未知选项: ${selection}`);
       return false;
+  }
+}
+
+/**
+ * Handle user management submenu
+ */
+async function handleUserManagementMenu(options: MenuOptions): Promise<boolean> {
+  while (true) {
+    logger.newline();
+    logger.separator();
+    console.log(chalk.bold.cyan('👥 用户管理'));
+    logger.separator();
+    logger.newline();
+
+    const userMenuOptions = [
+      { name: chalk.cyan('📋 查看用户列表'), value: 'user-list' },
+      { name: chalk.green('➕ 添加用户'), value: 'user-add' },
+      { name: chalk.red('➖ 删除用户'), value: 'user-delete' },
+      { name: chalk.blue('📤 显示分享链接'), value: 'user-share' },
+      { type: 'separator' },
+      { name: chalk.gray('⬅️  返回主菜单'), value: 'back' },
+    ];
+
+    const selection = await showMenu(userMenuOptions, chalk.bold('请选择操作:'));
+
+    switch (selection) {
+      case 'back':
+        return false; // Return to main menu
+
+      case 'user-list':
+        logger.newline();
+        await listUsers(options);
+        await promptContinue();
+        break;
+
+      case 'user-add':
+        logger.newline();
+        await addUser(options);
+        await promptContinue();
+        break;
+
+      case 'user-delete':
+        logger.newline();
+        await deleteUser(options);
+        await promptContinue();
+        break;
+
+      case 'user-share':
+        logger.newline();
+        await showUserShare(options);
+        await promptContinue();
+        break;
+
+      default:
+        logger.warn(`未知选项: ${selection}`);
+        break;
+    }
   }
 }
 

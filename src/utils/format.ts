@@ -3,8 +3,6 @@
  * @module utils/format
  */
 
-import type { MaskedValue } from '../types/user';
-
 /**
  * 脱敏选项
  */
@@ -28,25 +26,36 @@ export interface MaskOptions {
 export function maskSensitiveValue(
   value: string,
   options: MaskOptions = {}
-): MaskedValue {
+): string {
   const { prefixLength = 4, suffixLength = 4, maskChar = '*' } = options;
 
-  if (!value || value.length <= prefixLength + suffixLength) {
-    return {
-      masked: maskChar.repeat(value?.length || 8),
-      original: value || '',
-    };
+  // Handle empty or very short strings
+  if (!value) {
+    return maskChar.repeat(3);
   }
 
+  if (value.length <= prefixLength + suffixLength) {
+    // For short strings, show first char only
+    if (value.length <= 3) {
+      return value[0] + maskChar.repeat(value.length - 1 || 2);
+    }
+    return maskChar.repeat(value.length);
+  }
+
+  // Special handling for email addresses
+  if (value.includes('@')) {
+    const [localPart, domain] = value.split('@');
+    const maskedLocal = localPart.slice(0, Math.min(4, localPart.length)) +
+                       maskChar.repeat(Math.max(0, localPart.length - 4));
+    return `${maskedLocal}@${domain}`;
+  }
+
+  // Default masking: show first 4 and last 4
   const prefix = value.slice(0, prefixLength);
   const suffix = value.slice(-suffixLength);
   const maskLength = value.length - prefixLength - suffixLength;
-  const masked = `${prefix}${maskChar.repeat(maskLength)}${suffix}`;
 
-  return {
-    masked,
-    original: value,
-  };
+  return `${prefix}${maskChar.repeat(maskLength)}${suffix}`;
 }
 
 /**
