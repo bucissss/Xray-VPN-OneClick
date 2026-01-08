@@ -5,6 +5,7 @@
  * Following TDD: This test MUST FAIL before implementation
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock child_process
@@ -227,7 +228,6 @@ describe('SystemdManager - Command Validation', () => {
 
       try {
         const { SystemdManager } = await import('../../../src/services/systemd-manager');
-        const { TIMEOUTS } = await import('../../../src/constants/timeouts');
 
         const manager = new SystemdManager('xray');
 

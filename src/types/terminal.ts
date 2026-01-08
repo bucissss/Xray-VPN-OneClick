@@ -6,7 +6,7 @@
 /**
  * Operating system platform enumeration
  */
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 export enum Platform {
   WIN32 = 'win32',
   LINUX = 'linux',
@@ -14,6 +14,7 @@ export enum Platform {
   FREEBSD = 'freebsd',
   OTHER = 'other',
 }
+/* eslint-enable no-unused-vars */
 
 /**
  * Terminal capabilities interface

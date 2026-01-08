@@ -10,7 +10,7 @@ import { resolveIcon, resolveSpecialIcon, getStatusIndicator } from './icons';
 /**
  * 日志级别
  */
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 export enum LogLevel {
   DEBUG = 'debug',
   INFO = 'info',
@@ -18,11 +18,12 @@ export enum LogLevel {
   WARN = 'warn',
   ERROR = 'error',
 }
+/* eslint-enable no-unused-vars */
 
 /**
  * 输出模式
  */
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 export enum OutputMode {
   /** 完整模式：颜色 + 格式化 */
   RICH = 'rich',
@@ -31,6 +32,7 @@ export enum OutputMode {
   /** 管道模式：纯文本 + 时间戳 */
   PIPE = 'pipe',
 }
+/* eslint-enable no-unused-vars */
 
 /**
  * 日志选项
@@ -137,7 +139,7 @@ function formatMessage(level: LogLevel, message: string, includeIndicator: boole
  * @param colorFn - Chalk 颜色函数
  * @returns 着色后的消息
  */
-function applyColor(message: string, colorFn: (text: string) => string): string {
+function applyColor(message: string, colorFn: (_text: string) => string): string {
   const mode = getOutputMode();
 
   if (mode === OutputMode.RICH) {

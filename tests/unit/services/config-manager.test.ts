@@ -5,6 +5,7 @@
  * Following TDD: These tests MUST FAIL before implementation
  */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { existsSync } from 'fs';
 import { readFile, writeFile, mkdir, rm } from 'fs/promises';
@@ -32,7 +33,9 @@ describe('ConfigManager - Backup (T091)', () => {
     // Cleanup
     try {
       await rm(testConfigDir, { recursive: true, force: true });
-    } catch {}
+    } catch {
+      // Ignore cleanup errors
+    }
   });
 
   it('should create backup with timestamp filename', async () => {
@@ -142,7 +145,9 @@ describe('ConfigManager - Restore (T092)', () => {
   afterEach(async () => {
     try {
       await rm(testConfigDir, { recursive: true, force: true });
-    } catch {}
+    } catch {
+      // Ignore cleanup errors
+    }
   });
 
   it('should restore config from backup', async () => {
