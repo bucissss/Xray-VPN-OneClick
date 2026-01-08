@@ -169,44 +169,44 @@
 
 > **CRITICAL: Write tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T061 [P] [US3] Write unit test for UUID generation in tests/unit/services/user-manager.test.ts
-- [ ] T062 [P] [US3] Write unit test for email validation in tests/unit/services/user-manager.test.ts
-- [ ] T063 [P] [US3] Write integration test for add user workflow in tests/integration/user-management.test.ts
-- [ ] T064 [P] [US3] Write integration test for delete user workflow in tests/integration/user-management.test.ts
-- [ ] T065 [P] [US3] Write unit test for sensitive data masking in tests/unit/utils/format.test.ts
+- [x] T061 [P] [US3] Write unit test for UUID generation in tests/unit/services/user-manager.test.ts
+- [x] T062 [P] [US3] Write unit test for email validation in tests/unit/services/user-manager.test.ts
+- [x] T063 [P] [US3] Write integration test for add user workflow in tests/integration/user-management.test.ts
+- [x] T064 [P] [US3] Write integration test for delete user workflow in tests/integration/user-management.test.ts
+- [x] T065 [P] [US3] Write unit test for sensitive data masking in tests/unit/utils/format.test.ts
 
 **Constitution Compliance Checks for Tests:**
-- [ ] T066 [US3] Security test: Verify UUID auto-generation (Principle I - HIGHEST PRIORITY)
-- [ ] T067 [US3] Security test: Verify sensitive info masking (前4后4) (Principle I - HIGHEST PRIORITY)
-- [ ] T068 [US3] Security test: Verify service restart after user add/delete (Principle I)
+- [x] T066 [US3] Security test: Verify UUID auto-generation (Principle I - HIGHEST PRIORITY)
+- [x] T067 [US3] Security test: Verify sensitive info masking (前4后4) (Principle I - HIGHEST PRIORITY)
+- [x] T068 [US3] Security test: Verify service restart after user add/delete (Principle I)
 
 ### Implementation for User Story 3
 
-- [ ] T069 [P] [US3] Create ConfigManager class in src/services/config-manager.ts
-- [ ] T070 [US3] Implement readConfig method in src/services/config-manager.ts (parse JSON)
-- [ ] T071 [US3] Implement writeConfig method in src/services/config-manager.ts (set mode 0o600)
-- [ ] T072 [US3] Implement validateConfig method in src/services/config-manager.ts
-- [ ] T073 [US3] Implement backupConfig method in src/services/config-manager.ts (timestamped backups to /var/backups/xray/)
-- [ ] T074 [P] [US3] Create UserManager class in src/services/user-manager.ts
-- [ ] T075 [US3] Implement listUsers method in src/services/user-manager.ts (read from config)
-- [ ] T076 [US3] Implement addUser method in src/services/user-manager.ts (generate UUID with crypto.randomUUID())
-- [ ] T077 [US3] Implement deleteUser method in src/services/user-manager.ts
-- [ ] T078 [US3] Implement getShareInfo method in src/services/user-manager.ts (generate VLESS link)
-- [ ] T079 [US3] Integrate ConfigManager and SystemdManager in UserManager (auto restart after add/delete)
-- [ ] T080 [US3] Implement clipboard copy utility in src/utils/clipboard.ts using clipboardy
-- [ ] T081 [US3] Create user command handler in src/commands/user.ts
-- [ ] T082 [US3] Add user management submenu to interactive menu in src/commands/interactive.ts
-- [ ] T083 [US3] Implement user list display with table format (using console.table or manual formatting)
-- [ ] T084 [US3] Implement add user prompt flow in interactive menu
-- [ ] T085 [US3] Implement delete user prompt flow with confirmation in interactive menu
-- [ ] T086 [US3] Implement share info display with masked values and copy options
+- [x] T069 [P] [US3] Create ConfigManager class in src/services/config-manager.ts
+- [x] T070 [US3] Implement readConfig method in src/services/config-manager.ts (parse JSON)
+- [x] T071 [US3] Implement writeConfig method in src/services/config-manager.ts (set mode 0o600)
+- [x] T072 [US3] Implement validateConfig method in src/services/config-manager.ts
+- [x] T073 [US3] Implement backupConfig method in src/services/config-manager.ts (timestamped backups to /var/backups/xray/)
+- [x] T074 [P] [US3] Create UserManager class in src/services/user-manager.ts
+- [x] T075 [US3] Implement listUsers method in src/services/user-manager.ts (read from config)
+- [x] T076 [US3] Implement addUser method in src/services/user-manager.ts (generate UUID with crypto.randomUUID())
+- [x] T077 [US3] Implement deleteUser method in src/services/user-manager.ts
+- [x] T078 [US3] Implement getShareInfo method in src/services/user-manager.ts (generate VLESS link)
+- [x] T079 [US3] Integrate ConfigManager and SystemdManager in UserManager (auto restart after add/delete)
+- [x] T080 [US3] Implement clipboard copy utility in src/utils/clipboard.ts using clipboardy
+- [x] T081 [US3] Create user command handler in src/commands/user.ts
+- [x] T082 [US3] Add user management submenu to interactive menu in src/commands/interactive.ts
+- [x] T083 [US3] Implement user list display with table format (using console.table or manual formatting)
+- [x] T084 [US3] Implement add user prompt flow in interactive menu
+- [x] T085 [US3] Implement delete user prompt flow with confirmation in interactive menu
+- [x] T086 [US3] Implement share info display with masked values and copy options
 
 ### Constitution Compliance for User Story 3
 
-- [ ] T087 [US3] Security Review: Verify all sensitive data masked by default (Principle I)
-- [ ] T088 [US3] Security Review: Verify config file permissions set to 600 (Principle I)
-- [ ] T089 [US3] Reliability Check: Verify automatic backup before config modification (Principle III)
-- [ ] T090 [US3] Documentation: Update README with user management examples (Principle V)
+- [x] T087 [US3] Security Review: Verify all sensitive data masked by default (Principle I)
+- [x] T088 [US3] Security Review: Verify config file permissions set to 600 (Principle I)
+- [x] T089 [US3] Reliability Check: Verify automatic backup before config modification (Principle III)
+- [x] T090 [US3] Documentation: Update README with user management examples (Principle V)
 
 **Checkpoint**: All P1+P2 user stories should now be independently functional
 
