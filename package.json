@@ -28,10 +28,22 @@
     "cli",
     "systemd",
     "interactive",
-    "service-management"
+    "service-management",
+    "vless",
+    "reality",
+    "proxy",
+    "server-management"
   ],
-  "author": "",
+  "author": "DanOps-1",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DanOps-1/Xray-VPN-OneClick.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DanOps-1/Xray-VPN-OneClick/issues"
+  },
+  "homepage": "https://github.com/DanOps-1/Xray-VPN-OneClick#readme",
   "engines": {
     "node": ">=18.0.0"
   },
