@@ -10,6 +10,8 @@ import { select, confirm } from '@inquirer/prompts';
 import chalk from 'chalk';
 import logger from '../utils/logger';
 import { ExitCode } from '../constants/exit-codes';
+import { SystemdManager } from '../services/systemd-manager';
+import { displayServiceStatus, startService, stopService, restartService } from './service';
 
 /**
  * Menu options configuration
@@ -82,14 +84,26 @@ const menuStack = new MenuStack();
 /**
  * Get menu context (service status, user count)
  */
-export async function getMenuContext(): Promise<MenuContext> {
-  // TODO: Implement actual service status and user count retrieval
-  // For now, return mock data
-  return {
-    serviceStatus: 'unknown',
-    userCount: 0,
-    lastUpdated: new Date(),
-  };
+export async function getMenuContext(options: MenuOptions = {}): Promise<MenuContext> {
+  const serviceName = options.serviceName || 'xray';
+
+  try {
+    const manager = new SystemdManager(serviceName);
+    const status = await manager.getStatus();
+
+    return {
+      serviceStatus: status.healthy ? 'active' : status.active ? status.subState : 'inactive',
+      userCount: 0, // TODO: Implement user count from config
+      lastUpdated: new Date(),
+    };
+  } catch (error) {
+    // If service status fails, return unknown
+    return {
+      serviceStatus: 'unknown',
+      userCount: 0,
+      lastUpdated: new Date(),
+    };
+  }
 }
 
 /**
@@ -187,28 +201,50 @@ export async function showMenu(options: any[], message: string = '请选择操�
 /**
  * Handle menu selection
  */
-export async function handleMenuSelection(selection: string): Promise<boolean> {
+export async function handleMenuSelection(selection: string, options: MenuOptions): Promise<boolean> {
   switch (selection) {
     case 'exit':
       return true; // Signal to exit
 
     case 'service-status':
-      logger.info('查看服务状态功能即将推出...');
+      logger.newline();
+      await displayServiceStatus(options);
       await promptContinue();
       return false;
 
     case 'service-start':
-      logger.info('启动服务功能即将推出...');
+      logger.newline();
+      await startService(options);
       await promptContinue();
       return false;
 
     case 'service-stop':
-      logger.info('停止服务功能即将推出...');
+      logger.newline();
+      const confirmStop = await confirm({
+        message: chalk.yellow('⚠️  确定要停止服务吗？这将中断所有连接。'),
+        default: false,
+      });
+
+      if (confirmStop) {
+        await stopService(options);
+      } else {
+        logger.info('已取消停止操作');
+      }
       await promptContinue();
       return false;
 
     case 'service-restart':
-      logger.info('重启服务功能即将推出...');
+      logger.newline();
+      const confirmRestart = await confirm({
+        message: chalk.yellow('⚠️  确定要重启服务吗？'),
+        default: true,
+      });
+
+      if (confirmRestart) {
+        await restartService(options);
+      } else {
+        logger.info('已取消重启操作');
+      }
       await promptContinue();
       return false;
 
@@ -284,7 +320,7 @@ export async function startInteractiveMenu(options: MenuOptions): Promise<void> 
 
   try {
     // Get menu context
-    const context = await getMenuContext();
+    const context = await getMenuContext(options);
 
     // Main menu loop
     let shouldExit = false;
@@ -307,11 +343,11 @@ export async function startInteractiveMenu(options: MenuOptions): Promise<void> 
       const selection = await showMenu(menuOptions, chalk.bold('请选择操作:'));
 
       // Handle selection
-      shouldExit = await handleMenuSelection(selection);
+      shouldExit = await handleMenuSelection(selection, options);
 
       // Update context after each action
       if (!shouldExit) {
-        const updatedContext = await getMenuContext();
+        const updatedContext = await getMenuContext(options);
         Object.assign(context, updatedContext);
       }
     }

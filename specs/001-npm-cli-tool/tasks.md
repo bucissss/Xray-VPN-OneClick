@@ -144,16 +144,16 @@
 - [x] T051 [US2] Implement stop method in src/services/systemd-manager.ts
 - [x] T052 [US2] Implement restart method with graceful shutdown (10s timeout) in src/services/systemd-manager.ts
 - [x] T053 [US2] Implement parseSystemdError method in src/services/systemd-manager.ts (map errors to suggestions)
-- [ ] T054 [US2] Create service command handler in src/commands/service.ts (integrate with Commander.js)
-- [ ] T055 [US2] Add service status display to interactive menu in src/commands/interactive.ts
-- [ ] T056 [US2] Add service control actions (start/stop/restart) to interactive menu
-- [ ] T057 [US2] Implement progress feedback with Ora spinner during service operations
+- [x] T054 [US2] Create service command handler in src/commands/service.ts (integrate with Commander.js)
+- [x] T055 [US2] Add service status display to interactive menu in src/commands/interactive.ts
+- [x] T056 [US2] Add service control actions (start/stop/restart) to interactive menu
+- [x] T057 [US2] Implement progress feedback with Ora spinner during service operations
 
 ### Constitution Compliance for User Story 2
 
-- [ ] T058 [US2] Security Review: Verify no hardcoded credentials, input validation (Principle I)
-- [ ] T059 [US2] Reliability Check: Verify error messages include suggestions (Principle III)
-- [ ] T060 [US2] Documentation: Add usage examples in JSDoc (Principle V)
+- [x] T058 [US2] Security Review: Verify no hardcoded credentials, input validation (Principle I)
+- [x] T059 [US2] Reliability Check: Verify error messages include suggestions (Principle III)
+- [x] T060 [US2] Documentation: Add usage examples in JSDoc (Principle V)
 
 **Checkpoint**: At this point, User Stories 1 AND 2 (MVP) should both work independently
 
