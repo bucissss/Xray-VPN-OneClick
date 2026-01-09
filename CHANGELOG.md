@@ -5,11 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.1.1] - 2026-01-09
 
-🔧 **CI/CD Pipeline Polish & Code Quality Improvements**
+🌐 **Language Switching & Menu Fixes**
+
+### Added - 新增功能
+- **国际化支持 (i18n)**
+  - 添加中文和英文双语支持
+  - 新增语言切换菜单选项（🌐）
+  - 语言偏好自动保存到 `~/.xray-manager-lang`
+  - 重启后保持上次选择的语言
+  - 翻译所有菜单项、状态文本和消息
+
+### Fixed - 修复
+- **菜单分隔符显示 undefined**
+  - 修复使用 `Separator` 类替代错误的 `{ type: 'separator' }` 语法
+  - 菜单现在正确显示分隔线
 
 ### Changed - 改进
+
+🔧 **CI/CD Pipeline Polish & Code Quality Improvements**
 
 #### 🎯 代码质量
 - **Lint 问题完全修复**
