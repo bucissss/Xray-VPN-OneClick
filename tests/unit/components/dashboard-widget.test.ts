@@ -3,25 +3,25 @@ import { DashboardWidget } from '../../../src/components/dashboard-widget';
 import { UI_CONSTANTS } from '../../../src/constants/theme';
 
 // Mock dependencies
-vi.mock('../../../src/services/systemd-manager', () => ({
-  SystemdManager: vi.fn().mockImplementation(() => ({
-    getStatus: vi.fn().mockResolvedValue({
-      active: true,
-      subState: 'running',
-      loadState: 'loaded',
-      activeState: 'active',
-    }),
-  })),
-}));
+vi.mock('../../../src/services/systemd-manager', () => {
+  const SystemdManager = vi.fn();
+  SystemdManager.prototype.getStatus = vi.fn().mockResolvedValue({
+    active: true,
+    subState: 'running',
+    loadState: 'loaded',
+    activeState: 'active',
+  });
+  return { SystemdManager };
+});
 
-vi.mock('../../../src/services/user-manager', () => ({
-  UserManager: vi.fn().mockImplementation(() => ({
-    listUsers: vi.fn().mockResolvedValue([
-      { username: 'user1' },
-      { username: 'user2' },
-    ]),
-  })),
-}));
+vi.mock('../../../src/services/user-manager', () => {
+  const UserManager = vi.fn();
+  UserManager.prototype.listUsers = vi.fn().mockResolvedValue([
+    { username: 'user1' },
+    { username: 'user2' },
+  ]);
+  return { UserManager };
+});
 
 // Partial mock for os
 vi.mock('os', async () => {
@@ -41,6 +41,7 @@ describe('DashboardWidget', () => {
   let widget: DashboardWidget;
 
   beforeEach(() => {
+    vi.clearAllMocks();
     widget = new DashboardWidget();
   });
 
