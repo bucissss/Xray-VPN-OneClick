@@ -14,6 +14,8 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { confirm, input } from '@inquirer/prompts';
 import { menuIcons } from '../constants/ui-symbols';
+import { renderTable, renderHeader, type TableColumn } from '../utils/layout';
+import layoutManager from '../services/layout-manager';
 
 /**
  * User command options
@@ -46,7 +48,13 @@ export async function listUsers(options: UserCommandOptions = {}): Promise<void>
 
     logger.newline();
     logger.separator();
-    console.log(chalk.bold.cyan(`${menuIcons.USER} 用户列表 (共 ${users.length} 个用户)`));
+
+    // Use responsive header
+    const terminalSize = layoutManager.detectTerminalSize();
+    const headerTitle = `${menuIcons.USER} 用户列表 (共 ${users.length} 个用户)`;
+    const headerText = renderHeader(headerTitle, terminalSize.width, 'left');
+    console.log(chalk.bold.cyan(headerText));
+
     logger.separator();
     logger.newline();
 
@@ -56,17 +64,24 @@ export async function listUsers(options: UserCommandOptions = {}): Promise<void>
       return;
     }
 
-    // Display users in table format
-    for (const user of users) {
-      const maskedId = maskSensitiveValue(user.id);
-      console.log(chalk.cyan(`  邮箱: ${user.email}`));
-      console.log(chalk.gray(`     UUID: ${maskedId}`));
-      console.log(chalk.gray(`     等级: ${user.level}`));
-      if (user.flow) {
-        console.log(chalk.gray(`     Flow: ${user.flow}`));
-      }
-      logger.newline();
-    }
+    // Display users in table format using cli-table3
+    const columns: TableColumn[] = [
+      { header: '邮箱', key: 'email', align: 'left' },
+      { header: 'UUID (已脱敏)', key: 'maskedId', align: 'left' },
+      { header: '等级', key: 'level', align: 'center' },
+      { header: 'Flow', key: 'flow', align: 'center' },
+    ];
+
+    const tableData = users.map((user) => ({
+      email: user.email,
+      maskedId: maskSensitiveValue(user.id),
+      level: String(user.level),
+      flow: user.flow || '-',
+    }));
+
+    const tableOutput = renderTable(columns, tableData, { borderStyle: 'single' });
+    console.log(tableOutput);
+    logger.newline();
   } catch (error) {
     logger.error((error as Error).message);
     process.exit(1);
