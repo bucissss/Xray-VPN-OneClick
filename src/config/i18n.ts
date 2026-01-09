@@ -53,6 +53,10 @@ export interface Translations {
     languageSwitched: string;
     operationSuccess: string;
     operationFailed: string;
+    thankYou: string;
+    terminalTooNarrow: string;
+    terminalTooShort: string;
+    terminalResizeSuggestion: string;
   };
 }
 
@@ -86,6 +90,10 @@ const zhTranslations: Translations = {
     languageSwitched: '语言已切换为中文',
     operationSuccess: '操作成功',
     operationFailed: '操作失败',
+    thankYou: '感谢使用 Xray Manager!',
+    terminalTooNarrow: '终端宽度过窄',
+    terminalTooShort: '终端高度过低',
+    terminalResizeSuggestion: '请调整终端大小以获得最佳显示效果',
   },
 };
 
@@ -119,6 +127,10 @@ const enTranslations: Translations = {
     languageSwitched: 'Language switched to English',
     operationSuccess: 'Operation successful',
     operationFailed: 'Operation failed',
+    thankYou: 'Thank you for using Xray Manager!',
+    terminalTooNarrow: 'Terminal width is too narrow',
+    terminalTooShort: 'Terminal height is too short',
+    terminalResizeSuggestion: 'Please resize your terminal for optimal display',
   },
 };
 

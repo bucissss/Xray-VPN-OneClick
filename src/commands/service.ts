@@ -11,6 +11,8 @@ import logger from '../utils/logger';
 import chalk from 'chalk';
 import ora from 'ora';
 import { menuIcons } from '../constants/ui-symbols';
+import layoutManager from '../services/layout-manager';
+import { renderHeader, renderSection } from '../utils/layout';
 
 /**
  * Service command options
@@ -51,11 +53,17 @@ export async function displayServiceStatus(options: ServiceCommandOptions = {}):
     // 格式化显示
     logger.newline();
     logger.separator();
-    console.log(chalk.bold.cyan(`${menuIcons.STATUS} 服务状态: ${serviceName}`));
+
+    // Use responsive header based on terminal width
+    const terminalSize = layoutManager.detectTerminalSize();
+    const headerTitle = `${menuIcons.STATUS} 服务状态: ${serviceName}`;
+    const headerText = renderHeader(headerTitle, terminalSize.width, 'left');
+    console.log(chalk.bold.cyan(headerText));
+
     logger.separator();
     logger.newline();
 
-    // 状态指示器
+    // Group 1: 基本状态信息
     const statusIcon = status.healthy ? '[正常]' : status.active ? '[活动]' : '[停止]';
     const statusText = status.healthy
       ? chalk.green('运行中')
@@ -63,25 +71,50 @@ export async function displayServiceStatus(options: ServiceCommandOptions = {}):
         ? chalk.yellow(status.subState)
         : chalk.red('已停止');
 
-    console.log(`${statusIcon} 状态: ${statusText}`);
-    console.log(`   活动状态: ${chalk.cyan(status.activeState)}`);
-    console.log(`   子状态: ${chalk.cyan(status.subState)}`);
-    console.log(`   已加载: ${status.loaded ? chalk.green('是') : chalk.red('否')}`);
+    const basicStatusContent = `状态: ${statusText}
+活动状态: ${status.activeState}
+子状态: ${status.subState}
+已加载: ${status.loaded ? '是' : '否'}`;
 
-    if (status.pid) {
-      console.log(`   进程 PID: ${chalk.cyan(status.pid)}`);
+    const basicStatusSection = renderSection(
+      `${statusIcon} 基本状态`,
+      basicStatusContent,
+      { showBorder: false }
+    );
+    console.log(basicStatusSection);
+
+    // Group 2: 进程信息 (if available)
+    if (status.pid || status.memory || status.uptime) {
+      logger.newline();
+      let processContent = '';
+
+      if (status.pid) {
+        processContent += `进程 PID: ${status.pid}\n`;
+      }
+      if (status.memory) {
+        processContent += `内存占用: ${status.memory}\n`;
+      }
+      if (status.uptime) {
+        processContent += `运行时长: ${status.uptime}`;
+      }
+
+      const processSection = renderSection(
+        '[信息] 进程信息',
+        processContent.trim(),
+        { showBorder: false }
+      );
+      console.log(processSection);
     }
 
-    if (status.memory) {
-      console.log(`   内存占用: ${chalk.cyan(status.memory)}`);
-    }
-
-    if (status.uptime) {
-      console.log(`   运行时长: ${chalk.cyan(status.uptime)}`);
-    }
-
+    // Group 3: 其他信息 (if available)
     if (status.restarts !== undefined && status.restarts > 0) {
-      console.log(`   重启次数: ${chalk.yellow(status.restarts)}`);
+      logger.newline();
+      const otherSection = renderSection(
+        '[警告] 重启记录',
+        `重启次数: ${status.restarts}`,
+        { showBorder: false }
+      );
+      console.log(chalk.yellow(otherSection));
     }
 
     logger.newline();

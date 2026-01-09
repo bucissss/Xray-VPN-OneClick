@@ -16,6 +16,9 @@ import { displayServiceStatus, startService, stopService, restartService } from 
 import { listUsers, addUser, deleteUser, showUserShare } from './user';
 import { menuIcons } from '../constants/ui-symbols';
 import { t, toggleLanguage } from '../config/i18n';
+import layoutManager from '../services/layout-manager';
+import { renderHeader } from '../utils/layout';
+import { LayoutMode } from '../types/layout';
 
 /**
  * Menu options configuration
@@ -399,7 +402,32 @@ export async function handleSigInt(): Promise<boolean> {
  * Main interactive menu loop
  */
 export async function startInteractiveMenu(options: MenuOptions): Promise<void> {
-  logger.title('Xray Manager - 交互式管理工具');
+  const trans = t();
+
+  // Detect terminal size and validate
+  const terminalSize = layoutManager.detectTerminalSize();
+  const validation = layoutManager.validateTerminalSize(terminalSize);
+
+  // Get layout mode
+  const layoutMode = layoutManager.calculateLayoutMode(terminalSize.width);
+
+  // Determine title based on layout mode
+  let titleText = 'Xray Manager - 交互式管理工具';
+  if (layoutMode === LayoutMode.COMPACT) {
+    titleText = 'Xray Manager'; // Shorter title for compact terminals
+  }
+
+  // Display title with responsive header
+  const headerText = renderHeader(titleText, terminalSize.width, 'center');
+  console.log(chalk.bold.cyan(headerText));
+
+  // Warn if terminal is too small
+  if (!validation.isValid) {
+    logger.newline();
+    logger.warn(validation.message!);
+    logger.info(validation.suggestion!);
+    logger.newline();
+  }
 
   // Setup SIGINT handler
   let sigintHandled = false;
@@ -443,7 +471,7 @@ export async function startInteractiveMenu(options: MenuOptions): Promise<void> 
       const menuOptions = getMainMenuOptions();
 
       // Show menu and get selection
-      const selection = await showMenu(menuOptions, chalk.bold('请选择操作:'));
+      const selection = await showMenu(menuOptions, chalk.bold(trans.actions.selectAction));
 
       // Handle selection
       shouldExit = await handleMenuSelection(selection, options);
@@ -455,7 +483,7 @@ export async function startInteractiveMenu(options: MenuOptions): Promise<void> 
       }
     }
 
-    logger.success('感谢使用 Xray Manager!');
+    logger.success(trans.messages.thankYou || '感谢使用 Xray Manager!');
   } finally {
     // Cleanup
     process.removeListener('SIGINT', sigintHandler);
