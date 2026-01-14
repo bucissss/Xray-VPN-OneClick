@@ -11,6 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 新增 `review` 命令：对本地仓库生成开源成熟度评审报告（Markdown/JSON 输出）
 
+## [1.4.1] - 2026-01-14
+
+### Fixed - 修复
+
+- **修复 CLI 无法启动交互式菜单的问题**
+  - 使用 `program.action()` 设置默认行为
+  - 当没有子命令时自动启动交互式菜单
+  - 修复 Commander 注册子命令后自动显示帮助的问题
+
+---
+
 ## [1.4.0] - 2026-01-14
 
 🌐 **Feature 009: Cross-Platform Linux Support - 跨平台 Linux 支持**
