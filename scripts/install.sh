@@ -1,14 +1,35 @@
 #!/bin/bash
 
 # Xray 一键安装脚本
-# 适用于 Debian/Ubuntu/Kali Linux
+# 支持: Debian/Ubuntu/Kali/CentOS/AlmaLinux/Rocky/Fedora
 
 set -e
+
+# 获取脚本所在目录
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# 加载库函数
+if [[ -f "$SCRIPT_DIR/lib/detect-os.sh" ]]; then
+    source "$SCRIPT_DIR/lib/detect-os.sh"
+fi
+if [[ -f "$SCRIPT_DIR/lib/detect-env.sh" ]]; then
+    source "$SCRIPT_DIR/lib/detect-env.sh"
+fi
+if [[ -f "$SCRIPT_DIR/lib/package-manager.sh" ]]; then
+    source "$SCRIPT_DIR/lib/package-manager.sh"
+fi
 
 echo "================================"
 echo "Xray VLESS+Reality 一键安装脚本"
 echo "================================"
 echo ""
+
+# 检查 shell 兼容性
+if [[ -e /proc/$$/exe ]] && readlink /proc/$$/exe | grep -q "dash"; then
+    echo "错误: 请使用 bash 运行此脚本"
+    echo "使用命令: bash $0"
+    exit 1
+fi
 
 # 检查是否为 root
 if [ "$EUID" -ne 0 ]; then
@@ -17,13 +38,78 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
+# 检测操作系统
+echo "[0/5] 检测系统环境..."
+if type detect_os &>/dev/null; then
+    detect_os
+    echo "检测到: ${OS_PRETTY_NAME:-$OS_ID $OS_VERSION_ID}"
+    echo "系统家族: $OS_FAMILY_TYPE | 包管理器: $OS_PKG_MANAGER"
+
+    # 检查是否支持
+    if ! is_os_supported; then
+        print_unsupported_os_error
+        exit 1
+    fi
+
+    # 检查版本要求
+    if ! check_version_requirement; then
+        print_version_too_low_error
+        exit 1
+    fi
+
+    echo "✓ 系统检测通过"
+fi
+
+# 检测容器环境
+if type detect_container &>/dev/null; then
+    detect_container
+    if [[ "$ENV_IS_CONTAINER" == "true" ]]; then
+        echo ""
+        echo "警告: 检测到容器环境 ($ENV_CONTAINER_TYPE)"
+        echo "VPN 功能在容器中可能受限。"
+        read -p "是否继续安装？[y/N] " -r
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "安装已取消。"
+            exit 0
+        fi
+    fi
+fi
+
+# RHEL 系列启用 EPEL
+if type enable_epel &>/dev/null && [[ "$OS_FAMILY_TYPE" == "rhel" ]]; then
+    echo ""
+    echo "[1/5] 配置软件仓库..."
+    enable_epel
+fi
+
 # 安装 Xray
-echo "[1/4] 安装 Xray-core..."
-bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+echo ""
+echo "[2/5] 安装 Xray-core..."
+
+# 使用重试机制安装
+install_xray() {
+    bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+}
+
+MAX_RETRIES=3
+RETRY_COUNT=0
+while [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; do
+    if install_xray; then
+        break
+    fi
+    ((RETRY_COUNT++))
+    if [[ $RETRY_COUNT -lt $MAX_RETRIES ]]; then
+        echo "安装失败，等待 5 秒后重试 ($RETRY_COUNT/$MAX_RETRIES)..."
+        sleep 5
+    else
+        echo "错误: Xray 安装失败，已达到最大重试次数"
+        exit 1
+    fi
+done
 
 # 生成配置参数
 echo ""
-echo "[2/4] 生成配置参数..."
+echo "[3/5] 生成配置参数..."
 UUID=$(cat /proc/sys/kernel/random/uuid)
 KEYS=$(/usr/local/bin/xray x25519)
 PRIVATE_KEY=$(echo "$KEYS" | grep "Private key" | awk '{print $3}')
@@ -41,7 +127,7 @@ echo "服务器 IP: $SERVER_IP"
 
 # 创建配置文件
 echo ""
-echo "[3/4] 创建配置文件..."
+echo "[4/5] 创建配置文件..."
 cat > /usr/local/etc/xray/config.json <<EOF
 {
   "log": {
@@ -118,7 +204,7 @@ sed -i 's/User=nobody/User=root/' /etc/systemd/system/xray.service
 
 # 启动服务
 echo ""
-echo "[4/4] 启动 Xray 服务..."
+echo "[5/5] 启动 Xray 服务..."
 systemctl daemon-reload
 systemctl enable xray
 systemctl restart xray
