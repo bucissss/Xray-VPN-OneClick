@@ -141,7 +141,7 @@
 <td width="50%">
 
 #### 最低配置
-- **操作系统**: Linux (Debian/Ubuntu/CentOS/Kali)
+- **操作系统**: Linux (见下方支持列表)
 - **内存**: 512 MB RAM
 - **存储**: 100 MB 可用空间
 - **网络**: 公网 IP 地址
@@ -158,6 +158,18 @@
 </td>
 </tr>
 </table>
+
+#### 支持的操作系统
+
+| 发行版 | 最低版本 | 包管理器 | 状态 |
+|--------|----------|----------|------|
+| Ubuntu | 22.04 | apt | ✅ 完全支持 |
+| Debian | 11 | apt | ✅ 完全支持 |
+| Kali Linux | 2023+ | apt | ✅ 完全支持 |
+| CentOS Stream | 9 | dnf | ✅ 完全支持 |
+| AlmaLinux | 9 | dnf | ✅ 完全支持 |
+| Rocky Linux | 9 | dnf | ✅ 完全支持 |
+| Fedora | 39 | dnf | ✅ 完全支持 |
 
 ### 一键安装（推荐）
 
