@@ -42,24 +42,21 @@ async function main(): Promise<void> {
 
   registerReviewCommand(program);
 
-  // Parse arguments
-  program.parse(process.argv);
+  // Default action: start interactive menu when no command provided
+  program.action(async () => {
+    const options = program.opts();
 
-  const options = program.opts();
+    // Configure logger based on options
+    if (options.noColor) {
+      logger.configure({ color: false });
+    }
 
-  // Configure logger based on options
-  if (options.noColor) {
-    logger.configure({ color: false });
-  }
-
-  // If no command provided, start interactive menu
-  if (process.argv.length === 2 || program.args.length === 0) {
     try {
       // Perform preflight checks
       const preflightResult = await preflightChecks({
         checkSystemd: true,
-        checkXray: false, // Optional for menu startup
-        checkConfig: false, // Optional for menu startup
+        checkXray: false,
+        checkConfig: false,
       });
 
       if (!preflightResult.passed && preflightResult.critical) {
@@ -100,7 +97,10 @@ async function main(): Promise<void> {
 
       await gracefulExit(ExitCode.GENERAL_ERROR);
     }
-  }
+  });
+
+  // Parse and execute
+  await program.parseAsync(process.argv);
 }
 
 // Handle SIGINT (Ctrl+C)
