@@ -2,22 +2,234 @@
 
 # Xray 一键安装脚本
 # 支持: Debian/Ubuntu/Kali/CentOS/AlmaLinux/Rocky/Fedora
+# 版本: 2.0.0
 
 set -e
 
-# 获取脚本所在目录
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# ============================================
+# 内联的 OS 检测函数 (支持远程下载执行)
+# ============================================
 
-# 加载库函数
-if [[ -f "$SCRIPT_DIR/lib/detect-os.sh" ]]; then
-    source "$SCRIPT_DIR/lib/detect-os.sh"
-fi
-if [[ -f "$SCRIPT_DIR/lib/detect-env.sh" ]]; then
-    source "$SCRIPT_DIR/lib/detect-env.sh"
-fi
-if [[ -f "$SCRIPT_DIR/lib/package-manager.sh" ]]; then
-    source "$SCRIPT_DIR/lib/package-manager.sh"
-fi
+# Ensure PATH includes sbin directories
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
+
+# Supported distributions and minimum versions
+declare -A SUPPORTED_DISTROS=(
+    ["ubuntu"]="22.04"
+    ["debian"]="11"
+    ["kali"]="2023"
+    ["centos"]="9"
+    ["almalinux"]="9"
+    ["rocky"]="9"
+    ["fedora"]="39"
+    ["amzn"]="2023"
+)
+
+# OS family mapping
+declare -A OS_FAMILY=(
+    ["ubuntu"]="debian"
+    ["debian"]="debian"
+    ["kali"]="debian"
+    ["centos"]="rhel"
+    ["almalinux"]="rhel"
+    ["rocky"]="rhel"
+    ["fedora"]="rhel"
+    ["amzn"]="rhel"
+)
+
+# Package manager mapping
+declare -A PKG_MANAGER=(
+    ["debian"]="apt"
+    ["rhel"]="dnf"
+)
+
+# Global variables
+OS_ID=""
+OS_VERSION=""
+OS_VERSION_ID=""
+OS_FAMILY_TYPE=""
+OS_PKG_MANAGER=""
+OS_PRETTY_NAME=""
+
+# Detect operating system from /etc/os-release
+detect_os() {
+    OS_ID=""
+    OS_VERSION=""
+    OS_VERSION_ID=""
+    OS_FAMILY_TYPE=""
+    OS_PKG_MANAGER=""
+    OS_PRETTY_NAME=""
+
+    if [[ -e /etc/os-release ]]; then
+        source /etc/os-release
+        OS_ID="${ID,,}"  # lowercase
+        OS_VERSION="$VERSION"
+        OS_VERSION_ID="$VERSION_ID"
+        OS_PRETTY_NAME="$PRETTY_NAME"
+    elif [[ -e /etc/almalinux-release ]]; then
+        OS_ID="almalinux"
+        OS_VERSION_ID=$(grep -oE '[0-9]+\.[0-9]+' /etc/almalinux-release | head -1)
+    elif [[ -e /etc/rocky-release ]]; then
+        OS_ID="rocky"
+        OS_VERSION_ID=$(grep -oE '[0-9]+\.[0-9]+' /etc/rocky-release | head -1)
+    elif [[ -e /etc/centos-release ]]; then
+        OS_ID="centos"
+        OS_VERSION_ID=$(grep -oE '[0-9]+' /etc/centos-release | head -1)
+    elif [[ -e /etc/fedora-release ]]; then
+        OS_ID="fedora"
+        OS_VERSION_ID=$(grep -oE '[0-9]+' /etc/fedora-release | head -1)
+    elif [[ -e /etc/debian_version ]]; then
+        OS_ID="debian"
+        OS_VERSION_ID=$(cat /etc/debian_version)
+    fi
+
+    # Set OS family and package manager
+    if [[ -n "${OS_FAMILY[$OS_ID]}" ]]; then
+        OS_FAMILY_TYPE="${OS_FAMILY[$OS_ID]}"
+        OS_PKG_MANAGER="${PKG_MANAGER[$OS_FAMILY_TYPE]}"
+    fi
+
+    # Return success if OS was detected
+    [[ -n "$OS_ID" ]]
+}
+
+# Check if the detected OS is supported
+is_os_supported() {
+    [[ -n "${SUPPORTED_DISTROS[$OS_ID]}" ]]
+}
+
+# Get minimum supported version for current OS
+get_min_version() {
+    echo "${SUPPORTED_DISTROS[$OS_ID]:-}"
+}
+
+# Compare version numbers (returns 0 if v1 >= v2)
+version_ge() {
+    local v1="$1" v2="$2"
+    [[ "$(printf '%s\n%s' "$v1" "$v2" | sort -V | head -n1)" == "$v2" ]]
+}
+
+# Check if current OS version meets minimum requirement
+check_version_requirement() {
+    local min_version
+    min_version=$(get_min_version)
+    [[ -z "$min_version" ]] && return 1
+    version_ge "$OS_VERSION_ID" "$min_version"
+}
+
+# Print error for unsupported OS
+print_unsupported_os_error() {
+    echo ""
+    echo "❌ 错误: 不支持的操作系统"
+    echo "========================================"
+    echo "检测到: ${OS_PRETTY_NAME:-$OS_ID $OS_VERSION_ID}"
+    echo ""
+    echo "支持的系统:"
+    echo "  - Ubuntu 22.04+"
+    echo "  - Debian 11+"
+    echo "  - Kali Linux 2023+"
+    echo "  - CentOS Stream 9+"
+    echo "  - AlmaLinux 9+"
+    echo "  - Rocky Linux 9+"
+    echo "  - Fedora 39+"
+    echo "  - Amazon Linux 2023+"
+    echo "========================================"
+    echo ""
+}
+
+# Print error for version too low
+print_version_too_low_error() {
+    local min_version
+    min_version=$(get_min_version)
+    echo ""
+    echo "❌ 错误: 系统版本过低"
+    echo "========================================"
+    echo "检测到: ${OS_PRETTY_NAME:-$OS_ID $OS_VERSION_ID}"
+    echo "最低要求: $OS_ID $min_version+"
+    echo ""
+    echo "请升级您的系统后重试。"
+    echo "========================================"
+    echo ""
+}
+
+# ============================================
+# 内联的包管理器函数
+# ============================================
+
+# Install packages using the appropriate package manager
+pkg_install() {
+    case "$OS_PKG_MANAGER" in
+        apt)
+            apt-get update -qq
+            apt-get install -y "$@"
+            ;;
+        dnf)
+            dnf install -y "$@"
+            ;;
+        yum)
+            yum install -y "$@"
+            ;;
+        *)
+            echo "错误: 未知的包管理器"
+            return 1
+            ;;
+    esac
+}
+
+# Enable EPEL repository for RHEL-based systems
+enable_epel() {
+    if [[ "$OS_FAMILY_TYPE" == "rhel" && "$OS_ID" != "fedora" && "$OS_ID" != "amzn" ]]; then
+        if ! rpm -q epel-release &>/dev/null; then
+            echo "启用 EPEL 仓库..."
+            dnf install -y epel-release || true
+        fi
+    fi
+}
+
+# ============================================
+# 内联的环境检测函数
+# ============================================
+
+ENV_IS_CONTAINER="false"
+ENV_CONTAINER_TYPE=""
+
+detect_container() {
+    ENV_IS_CONTAINER="false"
+    ENV_CONTAINER_TYPE=""
+
+    # Check for Docker
+    if [[ -f /.dockerenv ]]; then
+        ENV_IS_CONTAINER="true"
+        ENV_CONTAINER_TYPE="docker"
+        return 0
+    fi
+
+    # Check cgroup for container hints
+    if grep -qE '(docker|lxc|kubepods)' /proc/1/cgroup 2>/dev/null; then
+        ENV_IS_CONTAINER="true"
+        if grep -q docker /proc/1/cgroup 2>/dev/null; then
+            ENV_CONTAINER_TYPE="docker"
+        elif grep -q lxc /proc/1/cgroup 2>/dev/null; then
+            ENV_CONTAINER_TYPE="lxc"
+        else
+            ENV_CONTAINER_TYPE="unknown"
+        fi
+        return 0
+    fi
+
+    # Check for OpenVZ
+    if [[ -d /proc/vz && ! -d /proc/bc ]]; then
+        ENV_IS_CONTAINER="true"
+        ENV_CONTAINER_TYPE="openvz"
+        return 0
+    fi
+
+    return 1
+}
+
+# ============================================
+# 主安装逻辑
+# ============================================
 
 echo "================================"
 echo "Xray VLESS+Reality 一键安装脚本"
@@ -40,47 +252,56 @@ fi
 
 # 检测操作系统
 echo "[0/5] 检测系统环境..."
-if type detect_os &>/dev/null; then
-    detect_os
-    echo "检测到: ${OS_PRETTY_NAME:-$OS_ID $OS_VERSION_ID}"
-    echo "系统家族: $OS_FAMILY_TYPE | 包管理器: $OS_PKG_MANAGER"
+detect_os
+echo "检测到: ${OS_PRETTY_NAME:-$OS_ID $OS_VERSION_ID}"
+echo "系统家族: $OS_FAMILY_TYPE | 包管理器: $OS_PKG_MANAGER"
 
-    # 检查是否支持
-    if ! is_os_supported; then
-        print_unsupported_os_error
-        exit 1
-    fi
-
-    # 检查版本要求
-    if ! check_version_requirement; then
-        print_version_too_low_error
-        exit 1
-    fi
-
-    echo "✓ 系统检测通过"
+# 检查是否支持
+if ! is_os_supported; then
+    print_unsupported_os_error
+    exit 1
 fi
 
+# 检查版本要求
+if ! check_version_requirement; then
+    print_version_too_low_error
+    exit 1
+fi
+
+echo "✓ 系统检测通过"
+
 # 检测容器环境
-if type detect_container &>/dev/null; then
-    detect_container
-    if [[ "$ENV_IS_CONTAINER" == "true" ]]; then
-        echo ""
-        echo "警告: 检测到容器环境 ($ENV_CONTAINER_TYPE)"
-        echo "VPN 功能在容器中可能受限。"
-        read -p "是否继续安装？[y/N] " -r
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            echo "安装已取消。"
-            exit 0
-        fi
+detect_container
+if [[ "$ENV_IS_CONTAINER" == "true" ]]; then
+    echo ""
+    echo "⚠️  警告: 检测到容器环境 ($ENV_CONTAINER_TYPE)"
+    echo "VPN 功能在容器中可能受限。"
+    read -p "是否继续安装？[y/N] " -r
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "安装已取消。"
+        exit 0
     fi
 fi
 
 # RHEL 系列启用 EPEL
-if type enable_epel &>/dev/null && [[ "$OS_FAMILY_TYPE" == "rhel" ]]; then
+if [[ "$OS_FAMILY_TYPE" == "rhel" ]]; then
     echo ""
     echo "[1/5] 配置软件仓库..."
     enable_epel
 fi
+
+# 安装依赖
+echo ""
+echo "[1.5/5] 安装依赖..."
+case "$OS_PKG_MANAGER" in
+    apt)
+        apt-get update -qq
+        apt-get install -y curl unzip openssl
+        ;;
+    dnf)
+        dnf install -y curl unzip openssl
+        ;;
+esac
 
 # 安装 Xray
 echo ""
@@ -112,6 +333,7 @@ echo ""
 echo "[3/5] 生成配置参数..."
 UUID=$(cat /proc/sys/kernel/random/uuid)
 KEYS=$(/usr/local/bin/xray x25519)
+
 # 兼容新旧版本 xray x25519 输出格式
 # 旧版: "Private key: xxx" / "Public key: xxx"
 # 新版 v26+: "PrivateKey: xxx" / "Password: xxx" (Password 即 PublicKey)
@@ -130,7 +352,7 @@ SHORT_ID=$(openssl rand -hex 8)
 
 # 验证密钥生成成功
 if [[ -z "$PRIVATE_KEY" || -z "$PUBLIC_KEY" ]]; then
-    echo "错误: 密钥生成失败"
+    echo "❌ 错误: 密钥生成失败"
     echo "xray x25519 输出:"
     echo "$KEYS"
     exit 1
@@ -142,7 +364,11 @@ echo "Public Key: $PUBLIC_KEY"
 echo "Short ID: $SHORT_ID"
 
 # 获取服务器 IP
-SERVER_IP=$(curl -s ifconfig.me)
+SERVER_IP=$(curl -s --connect-timeout 5 ifconfig.me || curl -s --connect-timeout 5 ip.sb || curl -s --connect-timeout 5 ipinfo.io/ip)
+if [[ -z "$SERVER_IP" ]]; then
+    echo "⚠️  无法自动获取公网 IP"
+    read -p "请手动输入服务器公网 IP: " SERVER_IP
+fi
 echo "服务器 IP: $SERVER_IP"
 
 # 创建配置文件
@@ -151,7 +377,9 @@ echo "[4/5] 创建配置文件..."
 cat > /usr/local/etc/xray/config.json <<EOF
 {
   "log": {
-    "loglevel": "warning"
+    "loglevel": "warning",
+    "access": "/var/log/xray/access.log",
+    "error": "/var/log/xray/error.log"
   },
   "inbounds": [
     {
@@ -219,8 +447,32 @@ cat > /usr/local/etc/xray/config.json <<EOF
 }
 EOF
 
-# 修改服务用户为 root
-sed -i 's/User=nobody/User=root/' /etc/systemd/system/xray.service
+# 确保日志目录存在
+mkdir -p /var/log/xray
+chmod 755 /var/log/xray
+
+# 修改服务用户为 root (需要绑定 443 端口)
+sed -i 's/User=nobody/User=root/' /etc/systemd/system/xray.service 2>/dev/null || true
+
+# 配置防火墙
+echo ""
+echo "[4.5/5] 配置防火墙..."
+if command -v firewall-cmd &>/dev/null && systemctl is-active --quiet firewalld; then
+    # firewalld (RHEL/CentOS/Fedora)
+    firewall-cmd --permanent --add-port=443/tcp 2>/dev/null || true
+    firewall-cmd --reload 2>/dev/null || true
+    echo "✓ firewalld 已配置"
+elif command -v ufw &>/dev/null && ufw status | grep -q "active"; then
+    # ufw (Ubuntu/Debian)
+    ufw allow 443/tcp 2>/dev/null || true
+    echo "✓ ufw 已配置"
+elif command -v iptables &>/dev/null; then
+    # iptables fallback
+    iptables -I INPUT -p tcp --dport 443 -j ACCEPT 2>/dev/null || true
+    echo "✓ iptables 已配置"
+else
+    echo "⚠️  未检测到防火墙，请手动开放 443 端口"
+fi
 
 # 启动服务
 echo ""
@@ -230,7 +482,7 @@ systemctl enable xray
 systemctl restart xray
 
 # 等待服务启动
-sleep 2
+sleep 3
 
 # 检查服务状态
 if systemctl is-active --quiet xray; then
@@ -260,6 +512,7 @@ if systemctl is-active --quiet xray; then
   cat > /root/xray-info.txt <<INFO
 Xray 配置信息
 生成时间: $(date)
+系统: ${OS_PRETTY_NAME:-$OS_ID $OS_VERSION_ID}
 
 服务器信息:
 - 地址: $SERVER_IP
@@ -287,7 +540,16 @@ INFO
 
 else
   echo ""
-  echo "❌ Xray 启动失败，请检查日志："
-  echo "journalctl -u xray -n 50"
+  echo "❌ Xray 启动失败"
+  echo ""
+  echo "请检查以下内容："
+  echo "1. 查看日志: journalctl -u xray -n 50"
+  echo "2. 检查配置: cat /usr/local/etc/xray/config.json"
+  echo "3. 检查端口: ss -tlnp | grep 443"
+  echo ""
+  echo "常见问题："
+  echo "- 端口 443 被占用"
+  echo "- 配置文件格式错误"
+  echo "- SELinux 阻止 (RHEL系): setenforce 0"
   exit 1
 fi

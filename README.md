@@ -256,6 +256,7 @@
 | AlmaLinux | 9 | dnf | ✅ 完全支持 |
 | Rocky Linux | 9 | dnf | ✅ 完全支持 |
 | Fedora | 39 | dnf | ✅ 完全支持 |
+| Amazon Linux | 2023 | dnf | ✅ 完全支持 |
 
 ### 一键安装（推荐）
 

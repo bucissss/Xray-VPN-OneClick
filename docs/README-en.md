@@ -182,6 +182,7 @@
 | AlmaLinux | 9 | dnf | ✅ Fully Supported |
 | Rocky Linux | 9 | dnf | ✅ Fully Supported |
 | Fedora | 39 | dnf | ✅ Fully Supported |
+| Amazon Linux | 2023 | dnf | ✅ Fully Supported |
 
 ### One-Click Installation (Recommended)
 
