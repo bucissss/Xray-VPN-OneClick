@@ -1,23 +1,38 @@
 <div align="center">
 
-# 🚀 Xray VPN OneClick
+# 🚀 Xray VPN OneClick | 一键科学上网
 
-<h3>一键部署 Xray VLESS+Reality 代理服务器</h3>
+<h3>5分钟部署 VLESS+Reality 代理服务器 — 最强抗封锁协议</h3>
 
 <p align="center">
-  <strong>最新协议 | 安全可靠 | 5分钟部署 | 全平台支持</strong>
+  <strong>🔥 无需域名/证书 | 流量伪装 TLS 1.3 | 主动探测防御 | 全平台客户端支持</strong>
 </p>
 
+<p align="center">
+  <em>自建梯子 · 科学上网 · 翻墙工具 · VPN替代方案 · 访问ChatGPT/Claude</em>
+</p>
+
+<!-- 核心徽章 -->
 [![npm version](https://img.shields.io/npm/v/xray-manager?style=for-the-badge&logo=npm&color=red)](https://www.npmjs.com/package/xray-manager)
 [![npm downloads](https://img.shields.io/npm/dm/xray-manager?style=for-the-badge&logo=npm&color=orange)](https://www.npmjs.com/package/xray-manager)
 [![GitHub Stars](https://img.shields.io/github/stars/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&logo=github&color=yellow)](https://github.com/DanOps-1/Xray-VPN-OneClick/stargazers)
-[![codecov](https://codecov.io/gh/DanOps-1/Xray-VPN-OneClick/branch/main/graph/badge.svg)](https://codecov.io/gh/DanOps-1/Xray-VPN-OneClick)
+[![GitHub Forks](https://img.shields.io/github/forks/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&logo=github)](https://github.com/DanOps-1/Xray-VPN-OneClick/network/members)
+
+<!-- CI/CD 徽章 -->
+[![CI](https://img.shields.io/github/actions/workflow/status/DanOps-1/Xray-VPN-OneClick/ci.yml?style=for-the-badge&logo=github-actions&label=CI)](https://github.com/DanOps-1/Xray-VPN-OneClick/actions)
+[![codecov](https://img.shields.io/codecov/c/github/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&logo=codecov)](https://codecov.io/gh/DanOps-1/Xray-VPN-OneClick)
 [![License](https://img.shields.io/github/license/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&color=blue)](https://github.com/DanOps-1/Xray-VPN-OneClick/blob/main/LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&color=green)](https://github.com/DanOps-1/Xray-VPN-OneClick/commits/main)
 
+<!-- 技术栈徽章 -->
 [![Platform](https://img.shields.io/badge/Platform-Linux-blue?style=for-the-badge&logo=linux)](https://github.com/DanOps-1/Xray-VPN-OneClick)
 [![Protocol](https://img.shields.io/badge/Protocol-VLESS%2BReality-purple?style=for-the-badge)](https://github.com/XTLS/REALITY)
-[![Docker](https://img.shields.io/badge/Docker-External-6c757d?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+
+<!-- 社区徽章 -->
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)](https://github.com/DanOps-1/Xray-VPN-OneClick/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&logo=github&color=red)](https://github.com/DanOps-1/Xray-VPN-OneClick/issues)
 
 [**中文**](README.md) | [**English**](docs/README-en.md)
 
@@ -28,6 +43,7 @@
 ## 📑 目录
 
 - [✨ 项目简介](#-项目简介)
+- [🌐 使用场景](#-使用场景)
 - [🎯 主要特性](#-主要特性)
 - [🆚 协议对比](#-协议对比)
 - [🚀 快速开始](#-快速开始)
@@ -60,6 +76,74 @@
 | 📱 **全平台兼容** | 支持 Windows、macOS、Linux、Android、iOS |
 | 🛠️ **完善工具** | 提供用户管理、备份恢复、一键更新等工具 |
 | 📚 **详尽文档** | 完整的中英文文档和故障排查指南 |
+
+---
+
+## 🌐 使用场景
+
+<table>
+<tr>
+<td width="50%">
+
+### 🤖 访问 AI 服务
+- ChatGPT / GPT-4
+- Claude / Anthropic
+- Google Gemini / Bard
+- Midjourney / DALL-E
+- GitHub Copilot
+
+</td>
+<td width="50%">
+
+### 🔒 隐私与安全
+- 公共 WiFi 安全防护
+- 防止 ISP 流量监控
+- 保护敏感通信
+- 匿名浏览
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 💼 远程办公
+- 安全访问公司内网
+- 跨国团队协作
+- 远程开发环境
+- 企业 VPN 替代方案
+
+</td>
+<td width="50%">
+
+### 🎓 学术研究
+- 访问 Google Scholar
+- 下载学术论文
+- 使用国际学术资源
+- 参与国际学术交流
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 👨‍💻 开发者工具
+- 访问 GitHub / GitLab
+- 使用 npm / Docker Hub
+- 查阅技术文档
+- Stack Overflow
+
+</td>
+<td width="50%">
+
+### 🌍 内容访问
+- YouTube / Netflix
+- Twitter / Instagram
+- Telegram / Discord
+- 国际新闻媒体
+
+</td>
+</tr>
+</table>
 
 ---
 

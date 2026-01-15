@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 文档 / Documentation
+    url: https://github.com/DanOps-1/Xray-VPN-OneClick#readme
+    about: 查看 README 和文档 / Check the README and documentation first
+  - name: 💬 讨论区 / Discussions
+    url: https://github.com/DanOps-1/Xray-VPN-OneClick/discussions
+    about: 提问或讨论 / Ask questions or start a discussion
+  - name: 🔍 常见问题 / FAQ
+    url: https://github.com/DanOps-1/Xray-VPN-OneClick/blob/main/docs/installation-guide.md#常见问题
+    about: 查看常见问题解答 / Check frequently asked questions

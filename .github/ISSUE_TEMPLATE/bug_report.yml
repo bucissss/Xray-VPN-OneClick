@@ -1,0 +1,127 @@
+name: 🐛 Bug 报告 / Bug Report
+description: 报告一个问题 / Report a bug
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你提交 Bug 报告！请尽可能详细地填写以下信息，这将帮助我们更快地定位和解决问题。
+
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible.
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 提交前检查 / Pre-submission Checklist
+      description: 请确认以下事项 / Please confirm the following
+      options:
+        - label: 我已搜索过现有 Issues，确认这不是重复问题 / I have searched existing issues and this is not a duplicate
+          required: true
+        - label: 我使用的是最新版本 / I am using the latest version
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述 / Bug Description
+      description: 清晰描述你遇到的问题 / A clear description of the bug
+      placeholder: |
+        例如：运行 xray-manager 时出现错误...
+        Example: When running xray-manager, an error occurs...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤 / Steps to Reproduce
+      description: 详细的复现步骤 / Detailed steps to reproduce
+      placeholder: |
+        1. 运行命令 `npm install -g xray-manager`
+        2. 执行 `xray-manager`
+        3. 选择 '查看服务状态'
+        4. 出现错误...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为 / Expected Behavior
+      description: 你期望发生什么 / What you expected to happen
+      placeholder: 应该显示服务状态信息...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为 / Actual Behavior
+      description: 实际发生了什么 / What actually happened
+      placeholder: 显示错误信息...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 操作系统 / Operating System
+      description: 你使用的操作系统 / Your operating system
+      options:
+        - Ubuntu 22.04
+        - Ubuntu 24.04
+        - Debian 11
+        - Debian 12
+        - CentOS Stream 9
+        - AlmaLinux 9
+        - Rocky Linux 9
+        - Fedora 39
+        - Fedora 40
+        - Kali Linux
+        - 其他 / Other
+    validations:
+      required: true
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js 版本 / Node.js Version
+      description: 运行 `node --version` 获取 / Run `node --version`
+      placeholder: "v18.17.0"
+    validations:
+      required: true
+
+  - type: input
+    id: package-version
+    attributes:
+      label: xray-manager 版本 / xray-manager Version
+      description: 运行 `xray-manager --version` 或查看 package.json
+      placeholder: "1.6.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 错误日志 / Error Logs
+      description: 相关的错误日志（请隐藏敏感信息）/ Relevant error logs (please hide sensitive info)
+      render: shell
+      placeholder: |
+        粘贴错误日志...
+        Paste error logs here...
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 补充信息 / Additional Context
+      description: 其他可能有帮助的信息 / Any other context
+      placeholder: 截图、配置文件片段等...
+
+  - type: checkboxes
+    id: willing-to-pr
+    attributes:
+      label: 贡献意愿 / Contribution
+      description: 你是否愿意提交 PR 来修复这个问题？/ Would you be willing to submit a PR to fix this?
+      options:
+        - label: 我愿意提交 PR 来修复这个问题 / I am willing to submit a PR to fix this issue
