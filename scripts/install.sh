@@ -224,7 +224,8 @@ detect_container() {
         return 0
     fi
 
-    return 1
+    # Not a container - return success (0) to avoid set -e exit
+    return 0
 }
 
 # ============================================
