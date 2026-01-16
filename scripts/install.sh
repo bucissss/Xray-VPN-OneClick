@@ -454,12 +454,19 @@ cat > /usr/local/etc/xray/config.json <<EOF
 }
 EOF
 
-# 确保日志目录存在
+# 确保日志目录和文件存在
 mkdir -p /var/log/xray
+touch /var/log/xray/access.log /var/log/xray/error.log
 chmod 755 /var/log/xray
+chmod 644 /var/log/xray/*.log
 
 # 修改服务用户为 root (需要绑定 443 端口)
-sed -i 's/User=nobody/User=root/' /etc/systemd/system/xray.service 2>/dev/null || true
+if [[ -f /etc/systemd/system/xray.service ]]; then
+    sed -i 's/User=nobody/User=root/' /etc/systemd/system/xray.service
+    echo "✓ 已修改服务用户为 root"
+else
+    echo "⚠️  警告: 未找到 xray.service 文件"
+fi
 
 # 配置防火墙
 echo ""
