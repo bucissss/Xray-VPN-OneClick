@@ -7,6 +7,7 @@
  */
 
 import { randomUUID, createPrivateKey, createPublicKey } from 'crypto';
+import { URLSearchParams } from 'url';
 import { ConfigManager } from './config-manager';
 import { SystemdManager } from './systemd-manager';
 import { PublicIpManager } from './public-ip-manager';
