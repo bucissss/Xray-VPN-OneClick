@@ -224,7 +224,7 @@ async function handleUserManagementMenu(options: MenuOptions): Promise<boolean> 
       { name: `${THEME.success('[添加]')} ${THEME.neutral('添加用户')}`, value: 'user-add' },
       { name: `${THEME.error('[删除]')} ${THEME.neutral('删除用户')}`, value: 'user-delete' },
       { name: `${THEME.secondary('[分享]')} ${THEME.neutral('显示分享链接')}`, value: 'user-share' },
-      { type: 'separator' },
+      new Separator(),
       { name: `${THEME.neutral('[返回]')} ${THEME.neutral('返回主菜单')}`, value: 'back' },
     ];
 
@@ -292,10 +292,10 @@ async function handleQuotaManagementMenu(options: MenuOptions): Promise<boolean>
       { name: `${THEME.secondary('[详情]')} ${THEME.neutral('查看配额详情')}`, value: 'quota-show' },
       { name: `${THEME.warning('[重置]')} ${THEME.neutral('重置已用流量')}`, value: 'quota-reset' },
       { name: `${THEME.success('[启用]')} ${THEME.neutral('重新启用用户')}`, value: 'quota-reenable' },
-      { type: 'separator' },
+      new Separator(),
       { name: `${THEME.warning('[检查]')} ${THEME.neutral('执行配额检查')}`, value: 'quota-check' },
       { name: `${THEME.primary('[配置]')} ${THEME.neutral('配置 Stats API')}`, value: 'stats-config' },
-      { type: 'separator' },
+      new Separator(),
       { name: `${THEME.neutral('[返回]')} ${THEME.neutral('返回主菜单')}`, value: 'back' },
     ];
 
