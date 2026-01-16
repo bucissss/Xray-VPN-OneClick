@@ -13,6 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.7.8] - 2026-01-16
+
+### Fixed - 修复
+
+- **新用户缺少 flow 参数导致连接失败**
+  - 添加用户时自动设置 `flow: xtls-rprx-vision`（VLESS + REALITY/TLS）
+  - 修复服务端配置与客户端链接不匹配导致握手失败的问题
+
+---
+
 ## [1.7.7] - 2026-01-16
 
 ### Fixed - 修复

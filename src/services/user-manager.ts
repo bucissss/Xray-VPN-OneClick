@@ -174,11 +174,21 @@ export class UserManager {
           inbound.settings.clients = [];
         }
 
+        // Determine flow value: use provided, or default for VLESS + REALITY
+        let flowValue = params.flow;
+        if (!flowValue && inbound.protocol === 'vless') {
+          // For VLESS with REALITY or TLS, default to xtls-rprx-vision
+          const security = inbound.streamSettings?.security;
+          if (security === 'reality' || security === 'tls') {
+            flowValue = 'xtls-rprx-vision';
+          }
+        }
+
         inbound.settings.clients.push({
           id,
           email: params.email,
           level: params.level,
-          flow: params.flow,
+          flow: flowValue,
         });
 
         added = true;
