@@ -454,19 +454,21 @@ cat > /usr/local/etc/xray/config.json <<EOF
 }
 EOF
 
-# 确保日志目录和文件存在
+# 确保日志目录和文件存在，并设置正确的权限
 mkdir -p /var/log/xray
 touch /var/log/xray/access.log /var/log/xray/error.log
 chmod 755 /var/log/xray
-chmod 644 /var/log/xray/*.log
+chmod 666 /var/log/xray/*.log  # 允许任何用户写入日志文件
 
-# 修改服务用户为 root (需要绑定 443 端口)
-if [[ -f /etc/systemd/system/xray.service ]]; then
-    sed -i 's/User=nobody/User=root/' /etc/systemd/system/xray.service
-    echo "✓ 已修改服务用户为 root"
-else
-    echo "⚠️  警告: 未找到 xray.service 文件"
-fi
+# 使用 systemd drop-in 配置覆盖服务用户设置
+# 这样可以避免被 Xray 更新覆盖，并且优先级高于默认配置
+mkdir -p /etc/systemd/system/xray.service.d
+cat > /etc/systemd/system/xray.service.d/99-user-override.conf <<EOF
+[Service]
+# Override user to root for binding port 443
+User=root
+EOF
+echo "✓ 已配置服务用户为 root"
 
 # 配置防火墙
 echo ""
