@@ -2,16 +2,16 @@
 
 <img src="../icon.png" alt="Xray VPN OneClick Logo" width="180" height="180">
 
-# 🚀 Xray VPN OneClick
+# 🚀 Xray VPN OneClick | One-Click Proxy Setup
 
-<h3>One-Click Xray VLESS+Reality Proxy Server Deployment</h3>
+<h3>Deploy VLESS+Reality Proxy Server in 5 Minutes — The Strongest Anti-Censorship Protocol</h3>
 
 <p align="center">
-  <strong>Latest Protocol | Secure & Reliable | 5-Min Setup | Cross-Platform</strong>
+  <strong>🔥 No Domain/Certificate Required | TLS 1.3 Traffic Camouflage | Active Probe Defense | Cross-Platform Support</strong>
 </p>
 
 <p align="center">
-  <em>Access ChatGPT · Claude · Google · YouTube · GitHub</em>
+  <em>Self-hosted Proxy · Bypass Restrictions · VPN Alternative · Access ChatGPT/Claude</em>
 </p>
 
 <!-- Core Badges -->
@@ -24,12 +24,17 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/DanOps-1/Xray-VPN-OneClick/ci.yml?style=for-the-badge&logo=github-actions&label=CI)](https://github.com/DanOps-1/Xray-VPN-OneClick/actions)
 [![codecov](https://img.shields.io/codecov/c/github/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&logo=codecov)](https://codecov.io/gh/DanOps-1/Xray-VPN-OneClick)
 [![License](https://img.shields.io/github/license/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&color=blue)](https://github.com/DanOps-1/Xray-VPN-OneClick/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&color=green)](https://github.com/DanOps-1/Xray-VPN-OneClick/commits/main)
 
 <!-- Tech Stack Badges -->
 [![Platform](https://img.shields.io/badge/Platform-Linux-blue?style=for-the-badge&logo=linux)](https://github.com/DanOps-1/Xray-VPN-OneClick)
 [![Protocol](https://img.shields.io/badge/Protocol-VLESS%2BReality-purple?style=for-the-badge)](https://github.com/XTLS/REALITY)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+
+<!-- Community Badges -->
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)](https://github.com/DanOps-1/Xray-VPN-OneClick/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/DanOps-1/Xray-VPN-OneClick?style=for-the-badge&logo=github&color=red)](https://github.com/DanOps-1/Xray-VPN-OneClick/issues)
 
 [**中文**](../README.md) | [**English**](README-en.md)
 
@@ -40,21 +45,17 @@
 ## 📑 Table of Contents
 
 - [✨ Introduction](#-introduction)
+- [🌐 Use Cases](#-use-cases)
 - [🎯 Key Features](#-key-features)
 - [🆚 Protocol Comparison](#-protocol-comparison)
 - [🚀 Quick Start](#-quick-start)
-  - [System Requirements](#system-requirements)
-  - [One-Click Installation](#one-click-installation-recommended)
-- [📱 Client Configuration](#-client-configuration)
 - [🛠️ Service Management](#️-service-management)
+- [📱 Client Configuration](#-client-configuration)
 - [🗑️ Uninstall & Cleanup](#️-uninstall--cleanup)
-- [📖 Documentation](#-documentation)
-- [🔒 Security Recommendations](#-security-recommendations)
-- [📊 Supported Cloud Platforms](#-supported-cloud-platforms)
 - [💡 FAQ](#-faq)
+- [📖 Documentation](#-documentation)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
-- [⚠️ Disclaimer](#️-disclaimer)
 
 ---
 
@@ -75,6 +76,74 @@
 
 ---
 
+## 🌐 Use Cases
+
+<table>
+<tr>
+<td width="50%">
+
+### 🤖 Access AI Services
+- ChatGPT / GPT-4
+- Claude / Anthropic
+- Google Gemini / Bard
+- Midjourney / DALL-E
+- GitHub Copilot
+
+</td>
+<td width="50%">
+
+### 🔒 Privacy & Security
+- Public WiFi protection
+- Prevent ISP traffic monitoring
+- Protect sensitive communications
+- Anonymous browsing
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 💼 Remote Work
+- Secure access to corporate intranet
+- Cross-border team collaboration
+- Remote development environment
+- Enterprise VPN alternative
+
+</td>
+<td width="50%">
+
+### 🎓 Academic Research
+- Access Google Scholar
+- Download academic papers
+- Use international academic resources
+- Participate in international academic exchanges
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### 👨‍💻 Developer Tools
+- Access GitHub / GitLab
+- Use npm / Docker Hub
+- Read technical documentation
+- Stack Overflow
+
+</td>
+<td width="50%">
+
+### 🌍 Content Access
+- YouTube / Netflix
+- Twitter / Instagram
+- Telegram / Discord
+- International news media
+
+</td>
+</tr>
+</table>
+
+---
+
 ## 🎯 Key Features
 
 <table>
@@ -83,7 +152,7 @@
 
 ### 🚀 Deployment Features
 - ✅ **One-Click Install** - Deploy in 5 minutes
-- ✅ **Auto-Configuration** - UUID & keys auto-generated
+- ✅ **Auto Configuration** - UUID & keys auto-generated
 - ✅ **systemd Integration** - Auto-start on boot
 - ✅ **Multiple Install Methods** - wget, curl, git clone
 - ✅ **China Acceleration** - Mirror acceleration available
@@ -131,7 +200,7 @@
 | Protocol | Speed | Security | Anti-Detection | Config Difficulty | Recommendation |
 |----------|-------|----------|----------------|-------------------|----------------|
 | **VLESS+Reality** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ✅ **Recommended** |
-| VMess+WS+TLS | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⚠️ Average |
+| VMess+WebSocket+TLS | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⚠️ Average |
 | Shadowsocks | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⚠️ Easily Blocked |
 | Trojan | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ✅ Alternative |
 | V2Ray (Legacy) | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ❌ Outdated |
@@ -146,126 +215,83 @@
 
 ## 🚀 Quick Start
 
-### System Requirements
+### 📋 System Requirements
+
+<details>
+<summary><b>Click to view detailed requirements</b></summary>
 
 <table>
 <tr>
 <td width="50%">
 
-#### Minimum Requirements
-- **OS**: Linux (see supported distros below)
-- **RAM**: 512 MB
-- **Storage**: 100 MB available
-- **Network**: Public IP address
+**Minimum Requirements**
+- OS: Linux (see supported list below)
+- RAM: 512 MB
+- Storage: 100 MB available
+- Network: Public IP address
 
 </td>
 <td width="50%">
 
-#### Recommended Configuration
-- **OS**: Ubuntu 22.04 LTS / Debian 12
-- **RAM**: 1 GB
-- **CPU**: 1 core
-- **Bandwidth**: 10 Mbps+
+**Recommended Configuration**
+- OS: Ubuntu 22.04 LTS / Debian 12
+- RAM: 1 GB
+- CPU: 1 core
+- Bandwidth: 10 Mbps+
 
 </td>
 </tr>
 </table>
 
-#### Supported Operating Systems
+**Supported Operating Systems**
 
-| Distribution | Min Version | Package Manager | Status |
-|--------------|-------------|-----------------|--------|
-| Ubuntu | 22.04 | apt | ✅ Fully Supported |
-| Debian | 11 | apt | ✅ Fully Supported |
-| Kali Linux | 2023+ | apt | ✅ Fully Supported |
-| CentOS Stream | 9 | dnf | ✅ Fully Supported |
-| AlmaLinux | 9 | dnf | ✅ Fully Supported |
-| Rocky Linux | 9 | dnf | ✅ Fully Supported |
-| Fedora | 39 | dnf | ✅ Fully Supported |
-| Amazon Linux | 2023 | dnf | ✅ Fully Supported |
+| Distribution | Minimum Version | Status |
+|--------------|-----------------|--------|
+| Ubuntu / Debian / Kali | 22.04 / 11 / 2023+ | ✅ Fully Supported |
+| CentOS Stream / AlmaLinux / Rocky | 9 | ✅ Fully Supported |
+| Fedora / Amazon Linux | 39 / 2023 | ✅ Fully Supported |
 
-### One-Click Installation (Recommended)
+</details>
 
-#### Option A: Direct Download (Servers outside China)
+### ⚡ One-Click Installation
 
+Choose the installation method that suits you (Method 1 recommended):
+
+<table>
+<tr>
+<td width="33%">
+
+**Method 1: Direct Install**
 ```bash
 wget https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh -O xray-install.sh
 sudo bash xray-install.sh
 ```
 
-Or using curl:
+</td>
+<td width="33%">
 
+**Method 2: Accelerated Install**
 ```bash
-curl -O https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh
-sudo bash install.sh
-```
-
-#### Option B: Accelerated Download (China or Restricted Networks)
-
-If above commands timeout, use these acceleration methods:
-
-```bash
-# Using GitHub proxy
+# Recommended for China servers
 wget https://ghproxy.com/https://raw.githubusercontent.com/DanOps-1/Xray-VPN-OneClick/main/scripts/install.sh -O xray-install.sh
 sudo bash xray-install.sh
 ```
 
-Or using jsDelivr CDN:
+</td>
+<td width="33%">
 
+**Method 3: Clone Repository**
 ```bash
-# jsDelivr CDN acceleration
-wget https://cdn.jsdelivr.net/gh/DanOps-1/Xray-VPN-OneClick@main/scripts/install.sh -O xray-install.sh
-sudo bash xray-install.sh
-```
-
-#### Option C: Clone Repository (Most Complete)
-
-```bash
-# Direct clone
 git clone https://github.com/DanOps-1/Xray-VPN-OneClick.git
 cd Xray-VPN-OneClick/scripts
 sudo bash install.sh
-
-# If git clone times out, use proxy
-git clone https://ghproxy.com/https://github.com/DanOps-1/Xray-VPN-OneClick.git
-cd Xray-VPN-OneClick/scripts
-sudo bash install.sh
 ```
 
-### Installation Process
+</td>
+</tr>
+</table>
 
-The installation script will automatically:
-
-1. ✅ Detect system environment and install dependencies
-2. ✅ Download and install latest Xray-core
-3. ✅ Auto-generate configuration parameters (UUID, keys, Short ID)
-4. ✅ Create optimized server configuration
-5. ✅ Configure and start systemd service
-6. ✅ Display client configuration info and share link
-
-### After Installation
-
-Upon completion, the script outputs:
-
-```
-================================
-✅ Xray Installation Successful!
-================================
-
-📋 Server Information:
-Address: YOUR_SERVER_IP
-Port: 443
-
-🔑 Client Configuration:
-UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-Public Key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-...
-
-📱 Share Link:
-vless://xxxxxxxx@YOUR_IP:443?...
-```
-
-**Save this information** for client configuration.
+After installation, the script will output server information and client configuration. **Please save them properly**.
 
 ---
 
@@ -283,14 +309,14 @@ vless://xxxxxxxx@YOUR_IP:443?...
 
 ### Quick Import
 
-**Option 1: Using Share Link (Recommended)**
+**Method 1: Using Share Link (Recommended)**
 
 1. Copy the VLESS share link from installation output
 2. Open client application
 3. Select "Import from Clipboard" or "Scan QR Code"
 4. Connect and start using
 
-**Option 2: Manual Configuration**
+**Method 2: Manual Configuration**
 
 See detailed tutorial: [Client Setup Guide](client-setup.md)
 
@@ -298,30 +324,129 @@ See detailed tutorial: [Client Setup Guide](client-setup.md)
 
 ## 🛠️ Service Management
 
-### Basic Commands
+### 🎯 Interactive CLI Tool (Recommended)
+
+Use the powerful CLI tool to manage Xray service after installation:
+
+```bash
+# Install CLI tool
+npm install -g xray-manager
+
+# Start interactive menu
+xray-manager
+# Or use short alias
+xm
+```
+
+> 💡 **Tip**: You can also use `npx xray-manager` to run without installation
+
+#### 🎨 Main Features
+
+| Module | Description |
+|--------|-------------|
+| 📊 **Service Management** | View status, start/stop/restart service |
+| 👥 **User Management** | Add/delete users, generate share links |
+| 📊 **Traffic Quota** ⭐ | Set quotas, traffic alerts, auto-disable on excess |
+| ⚙️ **Config Management** | Backup/restore config, modify settings |
+| 📝 **Log Viewer** | Real-time logs, filter by level/time |
+| 📈 **Dashboard** | Service overview, user stats, traffic stats |
+
+<details>
+<summary><b>View detailed feature list</b></summary>
+
+**Service Management**
+- View service status (uptime, memory usage)
+- Start/stop/restart service
+- Auto-detect permissions and systemd
+
+**User Management**
+- List all users (with traffic usage info)
+- Add new user (auto-generate UUID)
+- Delete user
+- Display share link (auto-copy to clipboard)
+
+**Traffic Quota Management** ⭐ NEW
+- Set traffic quota for users (preset/custom)
+- View traffic usage and remaining quota
+- Traffic alerts (80% yellow / 100% red)
+- Auto-disable users exceeding quota
+- Reset traffic and re-enable users
+
+**Config Management**
+- View current configuration
+- Create config backup (timestamped)
+- List all backups
+- Restore configuration
+- Modify config items
+
+**Log Viewer**
+- View recent logs
+- Real-time log tracking (Ctrl+C to stop)
+- Filter by level (error/warning/info/debug)
+- Filter by time range
+
+**Dashboard**
+- Service status overview
+- User statistics (active/warning/exceeded)
+- Total traffic usage statistics
+- Real-time data refresh
+
+</details>
+
+#### Terminal Compatibility 🌍
+
+<details>
+<summary><b>View terminal compatibility details</b></summary>
+
+The CLI tool supports various terminal environments with automatic adaptation:
+
+**Supported Terminals**
+- ✅ Modern terminals: xterm, iTerm2, GNOME Terminal, Konsole (Unicode + colors)
+- ✅ Windows CMD: Fully compatible (pure ASCII text icons)
+- ✅ SSH sessions: Auto-detect and adapt to remote terminal
+- ✅ Legacy terminals: vt100, dumb terminal (fallback to ASCII)
+- ✅ Pipe output: Auto-switch to plain text + timestamp mode when redirected
+
+**Three Output Modes**
+
+| Mode | Use Case | Features |
+|------|----------|----------|
+| **RICH** | Modern terminals (default) | Colors + Unicode icons + formatting |
+| **PLAIN_TTY** | No-color terminals | ASCII icons + formatting (no colors) |
+| **PIPE** | Pipe/log files | Plain text + timestamps + structured output |
+
+**Recommended Terminal Sizes**
+
+| Size Type | Terminal Size | Layout Mode |
+|-----------|---------------|-------------|
+| **Minimum** | 60x20 | COMPACT |
+| **Standard** | 80x24 | STANDARD (recommended) |
+| **Widescreen** | 120+ columns | WIDE |
+
+</details>
+
+### 🔧 Native systemd Commands
+
+If not using the CLI tool, you can use systemd commands directly:
 
 ```bash
 # Check service status
 sudo systemctl status xray
 
-# Start service
+# Start/stop/restart service
 sudo systemctl start xray
-
-# Stop service
 sudo systemctl stop xray
-
-# Restart service
 sudo systemctl restart xray
 
-# View live logs
-sudo journalctl -u xray -f
-
-# View recent logs
-sudo journalctl -u xray -n 100
+# View logs
+sudo journalctl -u xray -f        # Real-time logs
+sudo journalctl -u xray -n 100    # Last 100 lines
 ```
 
-### User Management
+<details>
+<summary><b>View Bash script tools</b></summary>
 
+**User Management Scripts**
 ```bash
 # Add new user
 sudo bash scripts/add-user.sh user@example.com
@@ -336,8 +461,7 @@ sudo bash scripts/show-config.sh users
 sudo bash scripts/show-config.sh link user@example.com
 ```
 
-### System Maintenance
-
+**System Maintenance Scripts**
 ```bash
 # Update Xray to latest version
 sudo bash scripts/update.sh
@@ -351,6 +475,8 @@ sudo bash scripts/restore.sh <backup-file>
 # Uninstall Xray
 sudo bash scripts/uninstall.sh
 ```
+
+</details>
 
 ---
 
@@ -376,7 +502,7 @@ sudo bash uninstall.sh
    - Type `Y` or press Enter: Keep backup in `/var/backups/xray/`
    - Type `n`: Don't keep backup
 
-**Automatic Cleanup:**
+**Auto Cleanup:**
 - ✅ Stop and disable Xray service
 - ✅ Backup configuration files (optional)
 - ✅ Uninstall Xray-core program
@@ -442,26 +568,27 @@ sudo lsof -i :443
 
 ## 📖 Documentation
 
-- [Complete Installation Guide](installation-guide.md) - Detailed installation and configuration steps
-- [Client Setup Guide](client-setup.md) - Configuration methods for all platforms
-- [User Management Guide](user-management.md) - Add, delete, and manage users
+- [Complete Installation Guide](installation-guide.md) - Detailed manual installation steps
+- [Client Setup Guide](client-setup.md) - Platform-specific client configuration
+- [User Management Guide](user-management.md) - How to add, delete, and manage users
+- [Open Source Review Guide](open-source-review.md) - Generate open source maturity report
 - [FAQ](installation-guide.md#common-issues) - Troubleshooting and solutions
-- [Performance Optimization](installation-guide.md#performance-optimization) - Suggestions to improve performance
+- [Performance Optimization](installation-guide.md#performance-optimization) - Tips to improve server performance
 
 ---
 
 ## 🔒 Security Recommendations
 
-### Basic Security Measures
+**Basic Security Measures**
 
-1. ✅ **Rotate Keys Regularly** - Recommended every 3-6 months for UUID and keys
-2. ✅ **Use Strong Passwords** - Set strong passwords or key authentication for SSH
-3. ✅ **Configure Firewall** - Only open necessary ports (443)
-4. ✅ **Regular Updates** - Keep Xray updated to latest version
-5. ✅ **Monitor Logs** - Regularly check logs for abnormal access
-6. ✅ **Backup Configs** - Regular backups to secure locations
+1. ✅ Rotate keys regularly (every 3-6 months recommended)
+2. ✅ Use strong passwords or key authentication
+3. ✅ Configure firewall, only open necessary ports
+4. ✅ Keep Xray updated to latest version
+5. ✅ Regularly check logs and backup configuration
 
-### Advanced Security Configuration
+<details>
+<summary><b>View advanced security configuration</b></summary>
 
 ```bash
 # Restrict SSH access
@@ -479,66 +606,27 @@ sudo apt install unattended-upgrades
 sudo dpkg-reconfigure --priority=low unattended-upgrades
 ```
 
+</details>
+
 ---
 
 ## 📊 Supported Cloud Platforms
 
 This project has been tested on the following cloud platforms:
 
-### International Cloud Platforms
-- ✅ **AWS EC2** - Amazon Web Services
-- ✅ **Google Cloud Platform** - GCP Compute Engine
-- ✅ **Microsoft Azure** - Azure Virtual Machines
-- ✅ **DigitalOcean** - Droplets
-- ✅ **Vultr** - Cloud Compute
-- ✅ **Linode** - Akamai Cloud
-- ✅ **Hetzner** - Cloud Servers
+<details>
+<summary><b>View supported cloud platform list</b></summary>
 
-### Chinese Cloud Platforms
-- ✅ **Alibaba Cloud** - ECS
-- ✅ **Tencent Cloud** - CVM
-- ✅ **Huawei Cloud** - ECS
+**International Cloud Platforms**
+- ✅ AWS EC2, Google Cloud Platform, Microsoft Azure
+- ✅ DigitalOcean, Vultr, Linode, Hetzner
 
-> **Note**: Using on Chinese cloud platforms may face compliance risks, choose carefully.
+**Chinese Cloud Platforms**
+- ✅ Alibaba Cloud, Tencent Cloud, Huawei Cloud
 
----
+> **Note**: Using on Chinese cloud platforms may face compliance risks, please choose carefully.
 
-## 🐳 Docker Deployment (External Image)
-
-This repository does not ship a Dockerfile or docker-compose file yet. The commands below are external image examples.
-Please refer to the image maintainer's documentation for the latest usage.
-
-### Using Docker
-
-```bash
-# Pull external image (example)
-docker pull danops/xray-reality
-
-# Run container
-docker run -d \
-  --name xray \
-  -p 443:443 \
-  -v /etc/xray:/etc/xray \
-  --restart=unless-stopped \
-  danops/xray-reality
-```
-
-### Using Docker Compose
-
-```yaml
-version: '3'
-services:
-  xray:
-    image: danops/xray-reality
-    container_name: xray
-    restart: unless-stopped
-    ports:
-      - "443:443"
-    volumes:
-      - ./config:/etc/xray
-```
-
-Detailed instructions: refer to the image maintainer's documentation
+</details>
 
 ---
 
@@ -619,6 +707,78 @@ Issues and Pull Requests are welcome!
 
 ## 📝 Changelog
 
+### v1.6.0 (2026-01-15)
+
+**Auto-Enable Stats API**
+
+- ✅ Auto-detect Stats API configuration status
+- ✅ One-click auto-configure Stats API (add stats/api/inbound/routing)
+- ✅ Auto-backup before configuration, auto-rollback on failure
+- ✅ Smart port detection, auto-select available port
+- ✅ Traffic quota menu adds "Configure Stats API" option
+- ✅ Auto-prompt configuration when viewing traffic details
+
+### v1.5.0 (2026-01-14)
+
+**Traffic Quota Management & UI Enhancement**
+
+- ✅ Traffic quota management system - Allocate and manage user traffic quotas
+- ✅ Real-time traffic statistics - Get user traffic usage via Xray Stats API
+- ✅ Quota alert system - Yellow warning when approaching limit, red when exceeded
+- ✅ Auto-disable feature - Automatically disable users exceeding quota
+- ✅ Progress bar component - Visualize traffic usage percentage
+- ✅ Dashboard enhancement - Display traffic overview and user status statistics
+- ✅ Support preset quotas (1GB/5GB/10GB/50GB/100GB/Unlimited)
+- ✅ Support custom quotas (MB/GB/TB units)
+- ✅ Traffic reset and user re-enable functionality
+- ✅ Complete unit tests and integration tests
+
+<details>
+<summary><b>View historical versions</b></summary>
+
+### v1.4.1 (2026-01-12)
+
+**Bug Fix**
+
+- ✅ Fix CLI unable to start interactive menu issue
+
+### v1.4.0 (2026-01-11)
+
+**Cross-Platform Support**
+
+- ✅ Support more Linux distributions (CentOS Stream 9, AlmaLinux 9, Rocky Linux 9, Fedora 39)
+- ✅ Auto-detect package manager (apt/dnf)
+- ✅ Improved installation script compatibility
+
+### v1.3.0 (2026-01-10)
+
+**Config Management Enhancement**
+
+- ✅ Config backup and restore functionality
+- ✅ Config item modification
+- ✅ Backup list management
+
+### v1.2.0 (2026-01-09)
+
+**Responsive Layout System**
+
+- ✅ Terminal size adaptive layout (COMPACT/STANDARD/WIDE)
+- ✅ Multi-column display support for wide terminals
+- ✅ Compact mode for narrow terminals
+
+### v1.1.0 (2026-01-08)
+
+**CLI User Interface Optimization**
+
+- ✅ Terminal capability auto-detection system (TTY/color/Unicode/width)
+- ✅ Smart icon resolver (Unicode ↔️ ASCII auto-adaptation)
+- ✅ Three output modes (RICH/PLAIN_TTY/PIPE)
+- ✅ Windows CMD fully compatible (pure ASCII text icons)
+- ✅ All emojis replaced with text labels [label] format
+- ✅ Clear menu grouping (Service Operations/Management Functions/Exit)
+- ✅ 80-column layout optimization (all UI element width verified)
+- ✅ 210 tests all passed, coverage >90%
+
 ### v1.0.0 (2026-01-07)
 
 **Initial Release**
@@ -630,6 +790,8 @@ Issues and Pull Requests are welcome!
 - ✅ Detailed bilingual documentation
 - ✅ Multi-platform client configuration guides
 - ✅ Performance optimization and security hardening guides
+
+</details>
 
 ---
 
@@ -691,7 +853,7 @@ But you must:
 
 ---
 
-## 💬 Support
+## 💬 Get Help
 
 ### How to Get Support
 
@@ -709,6 +871,28 @@ Please provide the following information in your issue:
 3. Detailed problem description and error messages
 4. Related configuration files (hide sensitive information)
 5. Solutions you've already tried
+
+---
+
+## ⭐ Star History
+
+<a href="https://star-history.com/#DanOps-1/Xray-VPN-OneClick&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=DanOps-1/Xray-VPN-OneClick&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=DanOps-1/Xray-VPN-OneClick&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=DanOps-1/Xray-VPN-OneClick&type=Date" />
+ </picture>
+</a>
+
+---
+
+## 👥 Contributors
+
+Thanks to all the people who have contributed to this project!
+
+<a href="https://github.com/DanOps-1/Xray-VPN-OneClick/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=DanOps-1/Xray-VPN-OneClick" />
+</a>
 
 ---
 
