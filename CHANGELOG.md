@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added - 新增功能
 
+- 暂无
+
+---
+
+## [1.8.0] - 2026-01-16
+
+### Added - 新增功能
+
+- 新增 `clash` 命令：从 VLESS 分享链接生成 Clash 配置文件（默认输出 `~/clash-config-v3.yaml`）
+- 分享链接流程支持一键生成 Clash 配置
 - 新增 `review` 命令：对本地仓库生成开源成熟度评审报告（Markdown/JSON 输出）
 
 ---
