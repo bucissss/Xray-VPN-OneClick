@@ -11,7 +11,12 @@ import { QuotaManager } from '../services/quota-manager';
 import { TrafficManager } from '../services/traffic-manager';
 import { maskSensitiveValue } from '../utils/format';
 import { copyToClipboard } from '../utils/clipboard';
-import { formatTraffic, formatUsageSummary, calculateUsagePercent, getAlertLevel } from '../utils/traffic-formatter';
+import {
+  formatTraffic,
+  formatUsageSummary,
+  calculateUsagePercent,
+  getAlertLevel,
+} from '../utils/traffic-formatter';
 import { promptQuotaInput } from './quota';
 import { exportClashConfigFromLink } from './clash';
 import logger from '../utils/logger';
@@ -21,6 +26,7 @@ import { confirm, input } from '@inquirer/prompts';
 import { menuIcons } from '../constants/ui-symbols';
 import { renderHeader } from '../utils/layout';
 import layoutManager from '../services/layout-manager';
+import { AppError } from '../utils/errors';
 
 /**
  * User command options
@@ -92,13 +98,15 @@ export async function listUsers(options: UserCommandOptions = {}): Promise<void>
       const usage = statsAvailable ? usages.find((u) => u.email === user.email) : undefined;
 
       // Calculate usage percentage and alert level
-      const usedBytes = statsAvailable ? (usage?.total || 0) : 0;
+      const usedBytes = statsAvailable ? usage?.total || 0 : 0;
       const quotaBytes = quota?.quotaBytes ?? -1;
       const percent = statsAvailable ? calculateUsagePercent(usedBytes, quotaBytes) : 0;
       const alertLevel = statsAvailable ? getAlertLevel(percent) : 'normal';
 
       // Color based on alert level
-      const getColorFn = (level: 'normal' | 'warning' | 'exceeded'): ((_text: string) => string) => {
+      const getColorFn = (
+        level: 'normal' | 'warning' | 'exceeded'
+      ): ((_text: string) => string) => {
         switch (level) {
           case 'exceeded':
             return chalk.red;
@@ -124,15 +132,25 @@ export async function listUsers(options: UserCommandOptions = {}): Promise<void>
       console.log(`     UUID: ${chalk.gray(maskSensitiveValue(user.id))}`);
 
       // Quota and usage info
-      const quotaDisplay = quota ? (quotaBytes < 0 ? '无限制' : formatTraffic(quotaBytes).display) : '未设置';
-      const usageDisplay = statsAvailable ? formatUsageSummary(usedBytes, quotaBytes) : '统计未启用';
+      const quotaDisplay = quota
+        ? quotaBytes < 0
+          ? '无限制'
+          : formatTraffic(quotaBytes).display
+        : '未设置';
+      const usageDisplay = statsAvailable
+        ? formatUsageSummary(usedBytes, quotaBytes)
+        : '统计未启用';
       const quotaColor = quota ? chalk.cyan : chalk.gray;
       console.log(`     配额: ${quotaColor(quotaDisplay)} | 使用: ${colorFn(usageDisplay)}`);
 
       logger.newline();
     }
   } catch (error) {
-    logger.error((error as Error).message);
+    if (AppError.isAppError(error)) {
+      logger.formattedError(error);
+    } else {
+      logger.error((error as Error).message);
+    }
     process.exit(1);
   }
 }
@@ -198,7 +216,11 @@ export async function addUser(options: UserCommandOptions = {}): Promise<void> {
       logger.success(`已设置配额: ${quotaDisplay}`);
     }
   } catch (error) {
-    logger.error((error as Error).message);
+    if (AppError.isAppError(error)) {
+      logger.formattedError(error);
+    } else {
+      logger.error((error as Error).message);
+    }
     process.exit(1);
   }
 }
@@ -257,7 +279,11 @@ export async function deleteUser(options: UserCommandOptions = {}): Promise<void
     spinner.succeed(chalk.green('用户删除成功！'));
     logger.success('服务已自动重启');
   } catch (error) {
-    logger.error((error as Error).message);
+    if (AppError.isAppError(error)) {
+      logger.formattedError(error);
+    } else {
+      logger.error((error as Error).message);
+    }
     process.exit(1);
   }
 }
@@ -341,7 +367,11 @@ export async function showUserShare(options: UserCommandOptions = {}): Promise<v
       });
     }
   } catch (error) {
-    logger.error((error as Error).message);
+    if (AppError.isAppError(error)) {
+      logger.formattedError(error);
+    } else {
+      logger.error((error as Error).message);
+    }
     process.exit(1);
   }
 }

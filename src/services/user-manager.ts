@@ -14,6 +14,9 @@ import { PublicIpManager } from './public-ip-manager';
 import { UserMetadataManager } from './user-metadata-manager';
 import type { User, CreateUserParams, UserShareInfo } from '../types/user';
 import { isValidEmail } from '../utils/validator';
+import { UserError, NetworkError } from '../utils/errors';
+import { UserErrors, NetworkErrors, ConfigErrors } from '../constants/error-codes';
+import { ConfigError } from '../utils/errors';
 
 /**
  * Generate X25519 public key from private key
@@ -28,8 +31,8 @@ function generatePublicKeyFromPrivate(privateKeyBase64: string): string {
 
     // X25519 PKCS#8 DER header (for 32-byte raw key)
     const pkcs8Header = Buffer.from([
-      0x30, 0x2e, 0x02, 0x01, 0x00, 0x30, 0x05, 0x06, 0x03, 0x2b, 0x65, 0x6e,
-      0x04, 0x22, 0x04, 0x20,
+      0x30, 0x2e, 0x02, 0x01, 0x00, 0x30, 0x05, 0x06, 0x03, 0x2b, 0x65, 0x6e, 0x04, 0x22, 0x04,
+      0x20,
     ]);
 
     const privateKeyDer = Buffer.concat([pkcs8Header, privateKeyBuffer]);
@@ -47,7 +50,7 @@ function generatePublicKeyFromPrivate(privateKeyBase64: string): string {
     const publicKeyRaw = publicKeySpki.slice(-32);
     return publicKeyRaw.toString('base64url');
   } catch {
-    throw new Error('Failed to generate public key from private key');
+    throw new UserError(UserErrors.KEY_GENERATION_FAILED);
   }
 }
 
@@ -92,7 +95,7 @@ export class UserManager {
    */
   validateEmail(email: string): void {
     if (!isValidEmail(email)) {
-      throw new Error(`无效的邮箱地址: ${email}`);
+      throw new UserError(UserErrors.INVALID_EMAIL, email);
     }
   }
 
@@ -140,7 +143,7 @@ export class UserManager {
     const existingUsers = await this.listUsers();
     const duplicate = existingUsers.find((u) => u.email === params.email);
     if (duplicate) {
-      throw new Error(`邮箱地址已存在: ${params.email}`);
+      throw new UserError(UserErrors.EMAIL_EXISTS, params.email);
     }
 
     // Backup config before modification
@@ -197,7 +200,7 @@ export class UserManager {
     }
 
     if (!added) {
-      throw new Error('配置文件中未找到 VLESS 或 VMess inbound');
+      throw new ConfigError(ConfigErrors.CONFIG_INVALID_STRUCTURE, '未找到 VLESS/VMess inbound');
     }
 
     // Write config
@@ -238,7 +241,7 @@ export class UserManager {
     }
 
     if (!found) {
-      throw new Error(`用户不存在: ${userId}`);
+      throw new UserError(UserErrors.USER_NOT_FOUND, userId);
     }
 
     // Write config
@@ -265,15 +268,17 @@ export class UserManager {
     let user: User | undefined;
     let inboundPort: number | undefined;
     let inboundProtocol: string | undefined;
-    let streamSettings: {
-      network?: string;
-      security?: string;
-      realitySettings?: {
-        privateKey: string;
-        serverNames: string[];
-        shortIds: string[];
-      };
-    } | undefined;
+    let streamSettings:
+      | {
+          network?: string;
+          security?: string;
+          realitySettings?: {
+            privateKey: string;
+            serverNames: string[];
+            shortIds: string[];
+          };
+        }
+      | undefined;
 
     for (const inbound of config.inbounds || []) {
       if (inbound.settings?.clients) {
@@ -296,7 +301,7 @@ export class UserManager {
     }
 
     if (!user) {
-      throw new Error(`用户不存在: ${userId}`);
+      throw new UserError(UserErrors.USER_NOT_FOUND, userId);
     }
 
     // Get public IP (from cache or detect)
@@ -305,7 +310,7 @@ export class UserManager {
       serverAddress = await this.publicIpManager.getPublicIp();
     } catch {
       // If detection fails, throw error - caller should handle manual input
-      throw new Error('无法获取公网 IP，请手动设置');
+      throw new NetworkError(NetworkErrors.PUBLIC_IP_FAILED);
     }
 
     // Build VLESS link based on security type

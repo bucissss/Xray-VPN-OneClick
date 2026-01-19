@@ -8,8 +8,17 @@
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { QuotaManager } from '../../src/services/quota-manager';
-import { formatTraffic, parseTraffic, calculateUsagePercent, getAlertLevel } from '../../src/utils/traffic-formatter';
-import { renderProgressBar, renderCompactBar, renderMiniIndicator } from '../../src/components/progress-bar';
+import {
+  formatTraffic,
+  parseTraffic,
+  calculateUsagePercent,
+  getAlertLevel,
+} from '../../src/utils/traffic-formatter';
+import {
+  renderProgressBar,
+  renderCompactBar,
+  renderMiniIndicator,
+} from '../../src/components/progress-bar';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import * as os from 'os';
@@ -21,7 +30,10 @@ describe('Quota Flow Integration Tests', () => {
 
   beforeEach(async () => {
     // Create unique temp directory for each test
-    tempDir = path.join(os.tmpdir(), `quota-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+    tempDir = path.join(
+      os.tmpdir(),
+      `quota-test-${Date.now()}-${Math.random().toString(36).slice(2)}`
+    );
     await fs.mkdir(tempDir, { recursive: true });
     quotaConfigPath = path.join(tempDir, 'quota.json');
     quotaManager = new QuotaManager(quotaConfigPath);
@@ -44,7 +56,10 @@ describe('Quota Flow Integration Tests', () => {
         quotaType: 'limited',
       });
 
-      const exists = await fs.access(quotaConfigPath).then(() => true).catch(() => false);
+      const exists = await fs
+        .access(quotaConfigPath)
+        .then(() => true)
+        .catch(() => false);
       expect(exists).toBe(true);
     });
 
@@ -126,7 +141,7 @@ describe('Quota Flow Integration Tests', () => {
           quotaBytes: 1024,
           quotaType: 'limited',
         })
-      ).rejects.toThrow('无效的邮箱格式');
+      ).rejects.toThrow('输入格式不正确');
     });
 
     it('should validate quota bytes', async () => {
@@ -136,7 +151,7 @@ describe('Quota Flow Integration Tests', () => {
           quotaBytes: -2, // Invalid: not -1 and not >= 0
           quotaType: 'limited',
         })
-      ).rejects.toThrow('无效的配额值');
+      ).rejects.toThrow('配额值无效');
     });
 
     it('should get all quotas', async () => {
