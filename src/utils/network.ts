@@ -50,9 +50,30 @@ function isValidIpv4(ip: string): boolean {
  * Validate IPv6 address format (simplified)
  */
 function isValidIpv6(ip: string): boolean {
-  const ipv6Regex =
-    /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::$|^([0-9a-fA-F]{1,4}:)*:([0-9a-fA-F]{1,4}:)*[0-9a-fA-F]{1,4}$/;
-  return ipv6Regex.test(ip);
+  // Handle special cases
+  if (ip === '::') return true;
+  if (ip === '::1') return true;
+
+  // Full IPv6 address: 8 groups of 4 hex digits
+  const fullIpv6 = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+  if (fullIpv6.test(ip)) return true;
+
+  // IPv6 with :: compression (can appear anywhere)
+  // Must have :: and valid hex groups before/after
+  if (ip.includes('::')) {
+    const parts = ip.split('::');
+    if (parts.length !== 2) return false;
+
+    const validatePart = (part: string): boolean => {
+      if (part === '') return true;
+      const groups = part.split(':');
+      return groups.every((g) => /^[0-9a-fA-F]{1,4}$/.test(g));
+    };
+
+    return validatePart(parts[0]) && validatePart(parts[1]);
+  }
+
+  return false;
 }
 
 /**
