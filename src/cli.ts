@@ -10,6 +10,7 @@
  */
 
 import { Command } from 'commander';
+import updateNotifier from 'update-notifier';
 import logger from './utils/logger';
 import { ExitCode, gracefulExit } from './constants/exit-codes';
 import { preflightChecks } from './utils/preflight';
@@ -19,6 +20,15 @@ import { registerClashCommand } from './commands/clash';
 
 // Read package.json for version
 const packageJson = require('../package.json');
+
+// Check for updates
+updateNotifier({
+  pkg: packageJson,
+  updateCheckInterval: 1000 * 60 * 60 * 24, // Check once per day
+}).notify({
+  isGlobal: true,
+  defer: false,
+});
 
 /**
  * Main CLI function
