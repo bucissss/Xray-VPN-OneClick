@@ -39,7 +39,7 @@ export const ConfigErrors = {
     solutions: [
       '运行安装脚本重新安装 Xray',
       '检查配置文件路径: /usr/local/etc/xray/config.json',
-      "使用 'xray-vpn config --restore' 从备份恢复",
+      "使用 'xray-manager config --restore' 从备份恢复",
     ],
   },
   CONFIG_NO_READ_PERMISSION: {
@@ -47,7 +47,7 @@ export const ConfigErrors = {
     title: '配置文件无读取权限',
     causes: ['当前用户权限不足', '文件权限设置错误', '未使用 sudo 运行'],
     solutions: [
-      "使用 sudo 运行: 'sudo xray-vpn'",
+      "使用 sudo 运行: 'sudo xray-manager' 或 'sudo xm'",
       "检查文件权限: 'ls -la /usr/local/etc/xray/config.json'",
       "修改权限: 'sudo chmod 644 /usr/local/etc/xray/config.json'",
     ],
@@ -56,7 +56,7 @@ export const ConfigErrors = {
     code: 'E103',
     title: '配置文件无写入权限',
     causes: ['当前用户权限不足', '文件系统只读', '磁盘空间不足'],
-    solutions: ["使用 sudo 运行: 'sudo xray-vpn'", "检查磁盘空间: 'df -h'", '检查文件系统状态'],
+    solutions: ["使用 sudo 运行: 'sudo xray-manager' 或 'sudo xm'", "检查磁盘空间: 'df -h'", '检查文件系统状态'],
   },
   CONFIG_INVALID_JSON: {
     code: 'E104',
@@ -64,7 +64,7 @@ export const ConfigErrors = {
     causes: ['JSON 语法错误', '文件被损坏', '编辑时引入错误'],
     solutions: [
       "使用 JSON 验证工具检查: 'cat config.json | jq .'",
-      "从备份恢复: 'xray-vpn config --restore'",
+      "从备份恢复: 'xray-manager config --restore'",
       '手动检查 JSON 语法（引号、逗号、括号匹配）',
     ],
   },
@@ -89,7 +89,7 @@ export const ConfigErrors = {
     title: '配置恢复失败',
     causes: ['备份文件不存在', '备份文件已损坏', '权限不足'],
     solutions: [
-      "列出可用备份: 'xray-vpn config --list-backups'",
+      "列出可用备份: 'xray-manager config --list-backups'",
       '选择一个有效的备份文件',
       '确保有足够权限写入配置文件',
     ],
@@ -115,9 +115,9 @@ export const UserErrors = {
     title: '邮箱地址已存在',
     causes: ['该邮箱已被其他用户使用', '尝试创建重复用户'],
     solutions: [
-      "使用 'xray-vpn user list' 查看现有用户",
+      "使用 'xray-manager user list' 查看现有用户",
       '选择一个不同的邮箱地址',
-      "如需更新用户，使用 'xray-vpn user update' 命令",
+      "如需更新用户，使用 'xray-manager user update' 命令",
     ],
   },
   USER_NOT_FOUND: {
@@ -125,9 +125,9 @@ export const UserErrors = {
     title: '用户不存在',
     causes: ['用户已被删除', '邮箱地址输入错误', '用户从未创建'],
     solutions: [
-      "使用 'xray-vpn user list' 查看所有用户",
+      "使用 'xray-manager user list' 查看所有用户",
       '检查邮箱地址是否正确（区分大小写）',
-      "使用 'xray-vpn user add' 创建新用户",
+      "使用 'xray-manager user add' 创建新用户",
     ],
   },
   INVALID_UUID: {
@@ -161,7 +161,7 @@ export const QuotaErrors = {
     title: '配额配置文件不存在',
     causes: ['配额功能未初始化', '文件被删除', '路径配置错误'],
     solutions: [
-      "运行 'xray-vpn quota init' 初始化配额系统",
+      "运行 'xray-manager quota init' 初始化配额系统",
       '检查文件路径: /usr/local/etc/xray/quota.json',
       '确保 Xray 配置目录存在',
     ],
@@ -181,8 +181,8 @@ export const QuotaErrors = {
     title: '用户配额不存在',
     causes: ['用户未设置配额', '用户邮箱错误', '用户已被删除'],
     solutions: [
-      "使用 'xray-vpn quota list' 查看所有配额",
-      "使用 'xray-vpn quota set <email> <limit>' 设置配额",
+      "使用 'xray-manager quota list' 查看所有配额",
+      "使用 'xray-manager quota set <email> <limit>' 设置配额",
       '确认用户邮箱地址正确',
     ],
   },
@@ -197,8 +197,8 @@ export const QuotaErrors = {
     title: '用户流量配额已超限',
     causes: ['用户流量使用超过限制', '配额设置过低'],
     solutions: [
-      "使用 'xray-vpn quota set <email> <new_limit>' 增加配额",
-      "使用 'xray-vpn quota reset <email>' 重置流量统计",
+      "使用 'xray-manager quota set <email> <new_limit>' 增加配额",
+      "使用 'xray-manager quota reset <email>' 重置流量统计",
       '考虑设置无限制配额 (-1)',
     ],
   },

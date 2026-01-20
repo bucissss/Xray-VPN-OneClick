@@ -352,20 +352,69 @@ export async function showUserShare(options: UserCommandOptions = {}): Promise<v
     } else {
       logger.hint('可以手动复制上方链接');
     }
+  } catch (error) {
+    if (AppError.isAppError(error)) {
+      logger.formattedError(error);
+    } else {
+      logger.error((error as Error).message);
+    }
+    process.exit(1);
+  }
+}
 
-    const exportClash = await confirm({
-      message: '是否生成 Clash 配置文件？',
-      default: false,
+/**
+ * Generate Clash config for a user
+ *
+ * @param options - Command options
+ */
+export async function generateClashConfig(options: UserCommandOptions = {}): Promise<void> {
+  try {
+    const manager = new UserManager(options.configPath, options.serviceName);
+
+    // List users first
+    const users = await manager.listUsers();
+
+    if (users.length === 0) {
+      logger.warn('暂无用户');
+      return;
+    }
+
+    logger.newline();
+    console.log(chalk.bold('📋 现有用户:'));
+    users.forEach((u, i) => {
+      console.log(`  ${i + 1}. ${u.email}`);
+    });
+    logger.newline();
+
+    // Prompt for user ID
+    const userId = await input({
+      message: '请输入要生成 Clash 配置的用户 UUID (或输入序号):',
     });
 
-    if (exportClash) {
-      await exportClashConfigFromLink({
-        link: shareInfo.shareLink,
-        proxyName: shareInfo.user.email,
-        promptOutputPath: true,
-        promptOverwrite: true,
-      });
+    // Check if input is a number (index)
+    let targetId = userId;
+    const index = parseInt(userId, 10) - 1;
+    if (!isNaN(index) && index >= 0 && index < users.length) {
+      targetId = users[index].id;
     }
+
+    const shareInfo = await manager.getShareInfo(targetId);
+
+    logger.newline();
+    logger.separator();
+    console.log(chalk.bold.cyan('🔧 生成 Clash 配置'));
+    logger.separator();
+    logger.newline();
+
+    console.log(chalk.cyan('  用户: ') + chalk.white(shareInfo.user.email));
+    logger.newline();
+
+    await exportClashConfigFromLink({
+      link: shareInfo.shareLink,
+      proxyName: shareInfo.user.email,
+      promptOutputPath: true,
+      promptOverwrite: true,
+    });
   } catch (error) {
     if (AppError.isAppError(error)) {
       logger.formattedError(error);
