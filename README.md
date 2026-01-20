@@ -326,10 +326,67 @@ sudo bash install.sh
 
 ### 🎯 交互式 CLI 工具（推荐）
 
-安装后使用强大的 CLI 工具管理 Xray 服务：
+#### 📦 安装 Node.js 和 npm（如果尚未安装）
+
+CLI 工具需要 Node.js 18+ 和 npm。如果你的系统还没有安装，请先执行：
+
+<details>
+<summary><b>Ubuntu / Debian / Kali</b></summary>
 
 ```bash
-# 安装 CLI 工具
+# 使用 NodeSource 仓库安装最新 LTS 版本
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# 验证安装
+node --version  # 应显示 v18.x 或更高
+npm --version   # 应显示 9.x 或更高
+```
+
+</details>
+
+<details>
+<summary><b>CentOS / RHEL / Fedora / AlmaLinux / Rocky</b></summary>
+
+```bash
+# 使用 NodeSource 仓库安装最新 LTS 版本
+curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
+sudo yum install -y nodejs
+
+# 验证安装
+node --version  # 应显示 v18.x 或更高
+npm --version   # 应显示 9.x 或更高
+```
+
+</details>
+
+<details>
+<summary><b>使用 nvm（推荐，适用于所有 Linux 发行版）</b></summary>
+
+```bash
+# 安装 nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# 重新加载 shell 配置
+source ~/.bashrc  # 或 source ~/.zshrc
+
+# 安装 Node.js LTS
+nvm install --lts
+nvm use --lts
+
+# 验证安装
+node --version
+npm --version
+```
+
+</details>
+
+#### 🚀 安装 CLI 工具
+
+安装 Node.js 后，使用以下命令安装 CLI 工具：
+
+```bash
+# 全局安装 CLI 工具
 npm install -g xray-manager
 
 # 启动交互式菜单
@@ -338,7 +395,7 @@ xray-manager
 xm
 ```
 
-> 💡 **提示**: 也可以使用 `npx xray-manager` 无需安装直接运行
+> 💡 **提示**: 也可以使用 `npx xray-manager` 无需安装直接运行（需要 npm）
 
 #### 🎨 主要功能
 
