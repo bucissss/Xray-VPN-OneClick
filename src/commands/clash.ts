@@ -42,10 +42,28 @@ interface ClashCommandOptions {
 
 function normalizeOutputPath(value: string): string {
   const trimmed = value.trim();
-  if (trimmed.startsWith('~/')) {
-    return join(homedir(), trimmed.slice(2));
+  let path = trimmed;
+
+  // 处理 ~ 开头的路径
+  if (path.startsWith('~/')) {
+    path = join(homedir(), path.slice(2));
   }
-  return trimmed || DEFAULT_PATHS.CLASH_CONFIG_FILE;
+
+  // 如果为空，使用默认路径
+  if (!path) {
+    return DEFAULT_PATHS.CLASH_CONFIG_FILE;
+  }
+
+  return path;
+}
+
+async function isDirectory(path: string): Promise<boolean> {
+  try {
+    const stat = await fs.stat(path);
+    return stat.isDirectory();
+  } catch {
+    return false;
+  }
 }
 
 async function fileExists(path: string): Promise<boolean> {
@@ -66,7 +84,13 @@ async function writeClashConfigFile(
     throw new Error('未提供 VLESS 链接');
   }
 
-  const outputPath = normalizeOutputPath(options.outputPath || DEFAULT_PATHS.CLASH_CONFIG_FILE);
+  let outputPath = normalizeOutputPath(options.outputPath || DEFAULT_PATHS.CLASH_CONFIG_FILE);
+
+  // 如果是目录，则追加默认文件名
+  if (await isDirectory(outputPath)) {
+    outputPath = join(outputPath, 'clash-config.yaml');
+  }
+
   const info = parseVlessLink(link);
   const { yaml, proxyName, proxyGroupName } = buildClashConfigYaml(info, {
     proxyName: options.proxyName,
