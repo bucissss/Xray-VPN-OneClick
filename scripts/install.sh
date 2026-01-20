@@ -314,9 +314,16 @@ esac
 echo ""
 echo "[2/5] 安装 Xray-core..."
 
+# 检查是否需要强制重装（如果服务文件不存在）
+FORCE_INSTALL=""
+if [[ ! -f /etc/systemd/system/xray.service ]] && [[ ! -f /etc/systemd/system/xray@.service ]]; then
+    echo "检测到 systemd 服务文件缺失，将强制重新安装..."
+    FORCE_INSTALL="--force"
+fi
+
 # 使用重试机制安装
 install_xray() {
-    bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+    bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install $FORCE_INSTALL
 }
 
 MAX_RETRIES=3
