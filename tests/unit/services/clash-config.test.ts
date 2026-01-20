@@ -224,9 +224,9 @@ describe('Clash Config Generator', () => {
 
       // Check that YAML has proper structure
       expect(result.yaml).toMatch(/^port: \d+/);
-      expect(result.yaml).toMatch(/proxies:\n  - name:/);
-      expect(result.yaml).toMatch(/proxy-groups:\n  - name:/);
-      expect(result.yaml).toMatch(/rules:\n  - MATCH,/);
+      expect(result.yaml).toMatch(/proxies:\n {2}- name:/);
+      expect(result.yaml).toMatch(/proxy-groups:\n {2}- name:/);
+      expect(result.yaml).toMatch(/rules:\n {2}- MATCH,/);
       expect(result.yaml.endsWith('\n')).toBe(true);
     });
 
