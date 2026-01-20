@@ -381,6 +381,11 @@ echo "服务器 IP: $SERVER_IP"
 # 创建配置文件
 echo ""
 echo "[4/5] 创建配置文件..."
+
+# 确保配置目录和日志目录存在
+mkdir -p /usr/local/etc/xray
+mkdir -p /var/log/xray
+
 cat > /usr/local/etc/xray/config.json <<EOF
 {
   "log": {
